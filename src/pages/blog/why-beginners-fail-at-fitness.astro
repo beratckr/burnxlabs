@@ -1,0 +1,211 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const postData = {
+    title: 'Why 80% of Beginners Quit Fitness Apps (And How We\'re Different)',
+    author: 'Sarah Chen',
+    date: 'December 15, 2024',
+    category: 'Fitness',
+    readTime: '5 min read'
+};
+---
+
+<Layout title={`${postData.title} - BurnXLabs Blog`}>
+    <!-- Article Header -->
+    <article class="pt-16 pb-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <!-- Meta -->
+            <div class="flex items-center space-x-4 mb-6 text-sm text-gray-600">
+                <span class="font-medium text-blue-600">{postData.category}</span>
+                <span>•</span>
+                <span>{postData.date}</span>
+                <span>•</span>
+                <span>{postData.readTime}</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                {postData.title}
+            </h1>
+
+            <!-- Author -->
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full"></div>
+                <div>
+                    <p class="font-semibold text-gray-900">{postData.author}</p>
+                    <p class="text-sm text-gray-600">CEO & Co-founder</p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Article Content -->
+    <section class="pb-20 px-6">
+        <div class="max-w-4xl mx-auto prose prose-lg prose-gray">
+            <p class="lead text-xl text-gray-700 leading-relaxed mb-8">
+                Last week, I watched my mom download her fourth fitness app this year. "Maybe this one will be different," 
+                she said. Three days later, it was deleted. Sound familiar?
+            </p>
+
+            <p>
+                If you've ever felt overwhelmed, confused, or discouraged by fitness apps, you're not alone. 
+                Research shows that 80% of people who download fitness apps stop using them within the first week. 
+                But here's the thing: it's not your fault.
+            </p>
+
+            <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-6">The Problem with Traditional Fitness Apps</h2>
+
+            <p>
+                Most fitness apps make three critical mistakes when it comes to beginners:
+            </p>
+
+            <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">1. They Assume Too Much Knowledge</h3>
+            
+            <p>
+                "Complete 3 sets of Bulgarian split squats, superset with RDLs." If that sentence made you anxious, 
+                you understand the problem. Traditional apps throw around terminology like everyone spent years in a gym. 
+                They assume you know what proper form looks like, how much weight to use, and when to rest.
+            </p>
+
+            <p>
+                For beginners, this creates an immediate barrier. You're not just learning to exercise; 
+                you're trying to decode a foreign language while your body screams in protest.
+            </p>
+
+            <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">2. They Start Too Intense</h3>
+
+            <p>
+                Most apps begin with a fitness assessment that leaves beginners gasping for air and questioning their life choices. 
+                Then they prescribe workouts designed for people who already have a base level of fitness. 
+                It's like teaching someone to swim by throwing them in the deep end.
+            </p>
+
+            <blockquote class="border-l-4 border-blue-500 pl-6 my-8 text-gray-700 italic">
+                "I couldn't walk properly for a week after my first workout. I thought something was wrong with me. 
+                Turns out, the app just wasn't designed for true beginners." - Beta tester feedback
+            </blockquote>
+
+            <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">3. They Focus on Extremes</h3>
+
+            <p>
+                Scroll through any fitness app and you'll see ripped athletes doing impossible-looking exercises. 
+                The message is clear: this is what fitness looks like. For beginners carrying extra weight or 
+                dealing with limited mobility, these images don't inspire—they intimidate.
+            </p>
+
+            <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-6">How BurnX Is Different</h2>
+
+            <p>
+                At BurnXLabs, we asked ourselves a simple question: What if we built a fitness app specifically 
+                for people who've never exercised before? Not simplified workouts for fit people, but a complete 
+                reimagining of how beginners start their fitness journey.
+            </p>
+
+            <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">We Speak Your Language</h3>
+
+            <p>
+                BurnX uses clear, simple language. We explain everything. When we say "do a squat," we don't assume 
+                you know what that means. Our AI coach breaks it down: "Stand with your feet shoulder-width apart. 
+                Pretend you're sitting back into a chair. Go as low as feels comfortable."
+            </p>
+
+            <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">We Start Where You Are</h3>
+
+            <p>
+                Your first BurnX workout might be five minutes of gentle movements. That's not a simplified version 
+                of a "real" workout—that IS a real workout for where you're starting. We build your fitness 
+                foundation slowly, ensuring you feel successful, not defeated.
+            </p>
+
+            <h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">We Celebrate Small Wins</h3>
+
+            <p>
+                Did you complete a 5-minute workout? That's worth celebrating. Did you choose stairs over the elevator? 
+                We notice. BurnX understands that for beginners, consistency matters more than intensity.
+            </p>
+
+            <div class="bg-blue-50 rounded-xl p-8 my-12">
+                <h4 class="text-lg font-semibold text-gray-900 mb-4">The BurnX Difference:</h4>
+                <ul class="space-y-3 text-gray-700">
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>No fitness jargon - everything explained in plain language</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Workouts that start at your actual fitness level</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>AI that adapts to your progress, not the other way around</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Focus on building habits, not breaking records</span>
+                    </li>
+                </ul>
+            </div>
+
+            <h2 class="text-2xl font-bold text-gray-900 mt-12 mb-6">The Future of Beginner Fitness</h2>
+
+            <p>
+                We believe the fitness industry has ignored beginners for too long. While other apps compete 
+                to offer more advanced features for fitness enthusiasts, we're focused on something more important: 
+                helping people take their first steps.
+            </p>
+
+            <p>
+                Because here's what we know: once you experience success, once you feel that post-workout high, 
+                once you notice you're sleeping better and have more energy—you're hooked. The hard part isn't 
+                maintaining a fitness routine; it's starting one in a way that doesn't make you want to quit.
+            </p>
+
+            <p>
+                That's why BurnX exists. Not to create more fitness fanatics (though if that happens, great!), 
+                but to help regular people discover that fitness isn't about perfection—it's about progress.
+            </p>
+
+            <div class="bg-gray-100 rounded-xl p-8 mt-12">
+                <p class="text-lg font-semibold text-gray-900 mb-2">Ready to try fitness differently?</p>
+                <p class="text-gray-700 mb-4">
+                    Join thousands waiting for a fitness app that actually understands beginners.
+                </p>
+                <a href="/#waitlist" class="inline-block bg-gray-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors">
+                    Join the BurnX Waitlist
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Footer -->
+    <section class="py-12 px-6 border-t border-gray-200">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex items-center justify-between">
+                <a href="/blog" class="text-blue-600 hover:text-blue-700 font-medium">
+                    ← Back to Blog
+                </a>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-600">Share:</span>
+                    <a href="#" class="text-gray-400 hover:text-gray-600">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-600">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>

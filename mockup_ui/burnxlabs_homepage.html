@@ -1,23 +1,105 @@
----
-import Layout from '../layouts/Layout.astro';
-import WaitlistForm from '../components/WaitlistForm.astro';
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BurnXLabs - AI Fitness Coaching for Beginners</title>
+    <meta name="description" content="BurnX - AI-powered fitness and nutrition coaching designed for beginners. Launch October 2025.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e'
+                        },
+                        accent: {
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48'
+                        }
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'system-ui', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="font-inter bg-white text-gray-900 antialiased">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-gray-200 z-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">B</span>
+                    </div>
+                    <span class="text-xl font-semibold text-gray-900">BurnXLabs</span>
+                </div>
 
-<Layout title="BurnXLabs - AI Fitness Coaching for Beginners">
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#product" class="text-gray-600 hover:text-gray-900 text-sm font-medium transition-colors">Product</a>
+                    <a href="#about" class="text-gray-600 hover:text-gray-900 text-sm font-medium transition-colors">About</a>
+                    <a href="#blog" class="text-gray-600 hover:text-gray-900 text-sm font-medium transition-colors">Blog</a>
+                    <a href="#contact" class="text-gray-600 hover:text-gray-900 text-sm font-medium transition-colors">Contact</a>
+                    <button onclick="scrollToWaitlist()" class="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors">
+                        Join Waitlist
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <div class="px-6 py-4 space-y-3">
+                <a href="#product" class="block text-gray-600 hover:text-gray-900 text-sm font-medium">Product</a>
+                <a href="#about" class="block text-gray-600 hover:text-gray-900 text-sm font-medium">About</a>
+                <a href="#blog" class="block text-gray-600 hover:text-gray-900 text-sm font-medium">Blog</a>
+                <a href="#contact" class="block text-gray-600 hover:text-gray-900 text-sm font-medium">Contact</a>
+                <button onclick="scrollToWaitlist()" class="w-full bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium mt-4">
+                    Join Waitlist
+                </button>
+            </div>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
-    <section class="pt-16 pb-20 px-6">
+    <section class="pt-32 pb-20 px-6">
         <div class="max-w-6xl mx-auto">
             <div class="text-center max-w-4xl mx-auto">
                 <!-- Badge -->
-                <div class="inline-flex items-center bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium mb-6">
-                    <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                <div class="inline-flex items-center bg-primary-50 text-primary-700 px-3 py-1 rounded-full text-sm font-medium mb-6">
+                    <span class="w-2 h-2 bg-primary-500 rounded-full mr-2"></span>
                     Coming October 2025
                 </div>
 
                 <!-- Headline -->
                 <h1 class="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
                     AI fitness coaching
-                    <span class="bg-gradient-to-r from-blue-600 to-pink-500 bg-clip-text text-transparent">
+                    <span class="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">
                         for beginners
                     </span>
                 </h1>
@@ -29,9 +111,9 @@ import WaitlistForm from '../components/WaitlistForm.astro';
 
                 <!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#waitlist" class="bg-gray-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors">
+                    <button onclick="scrollToWaitlist()" class="bg-gray-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors">
                         Join the waitlist
-                    </a>
+                    </button>
                     <a href="#product" class="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-medium hover:border-gray-400 transition-colors">
                         Learn more
                     </a>
@@ -57,8 +139,8 @@ import WaitlistForm from '../components/WaitlistForm.astro';
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Feature 1 -->
                 <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                         </svg>
                     </div>
@@ -70,8 +152,8 @@ import WaitlistForm from '../components/WaitlistForm.astro';
 
                 <!-- Feature 2 -->
                 <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                    <div class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
-                        <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-12 h-12 bg-accent-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-accent-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                         </svg>
                     </div>
@@ -209,9 +291,9 @@ import WaitlistForm from '../components/WaitlistForm.astro';
                                         <p class="text-sm text-gray-600">Beginner Full Body • 25 min</p>
                                     </div>
                                     
-                                    <div class="bg-blue-50 rounded-xl p-4">
+                                    <div class="bg-primary-50 rounded-xl p-4">
                                         <div class="flex items-center space-x-3">
-                                            <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center">
+                                            <div class="w-12 h-12 bg-primary-500 rounded-xl flex items-center justify-center">
                                                 <span class="text-white font-bold">1</span>
                                             </div>
                                             <div>
@@ -283,23 +365,153 @@ import WaitlistForm from '../components/WaitlistForm.astro';
             </div>
 
             <!-- Waitlist Form -->
-            <WaitlistForm />
+            <div id="waitlist" class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 max-w-md mx-auto">
+                <form id="waitlist-form" class="space-y-4">
+                    <input 
+                        type="email" 
+                        id="email" 
+                        placeholder="Enter your email" 
+                        required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-900"
+                    >
+                    <input 
+                        type="text" 
+                        id="firstName" 
+                        placeholder="First name (optional)" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-900"
+                    >
+                    <button 
+                        type="submit" 
+                        class="w-full bg-gray-900 text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
+                    >
+                        Join the waitlist
+                    </button>
+                </form>
+                
+                <p class="text-sm text-gray-500 mt-4">
+                    Get early access and launch updates. No spam, unsubscribe anytime.
+                </p>
+            </div>
         </div>
     </section>
-</Layout>
 
-<script>
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+    <!-- Footer -->
+    <footer class="py-16 px-6 bg-white border-t border-gray-200">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Company -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">B</span>
+                        </div>
+                        <span class="text-xl font-semibold text-gray-900">BurnXLabs</span>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        AI-powered fitness coaching designed specifically for beginners.
+                    </p>
+                </div>
+
+                <!-- Product -->
+                <div>
+                    <h4 class="font-semibold text-gray-900 mb-3">Product</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">BurnX App</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Features</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Pricing</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company -->
+                <div>
+                    <h4 class="font-semibold text-gray-900 mb-3">Company</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">About</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Blog</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Contact</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Press</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h4 class="font-semibold text-gray-900 mb-3">Legal</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Privacy</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Terms</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900 transition-colors">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-200 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm text-gray-600">© 2025 BurnXLabs. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-gray-600 transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-600 transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-600 transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.042-3.441.219-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.357-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-11.013C24.007 5.367 18.641.001 12.017.001z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Smooth scroll to waitlist
+        function scrollToWaitlist() {
+            document.getElementById('waitlist').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Form submission
+        document.getElementById('waitlist-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+            
+            const email = document.getElementById('email').value;
+            const firstName = document.getElementById('firstName').value;
+            
+            if (!email) {
+                alert('Please enter your email address.');
+                return;
             }
+            
+            // Simulate successful submission
+            alert('Thank you for joining our waitlist! We\'ll keep you updated on BurnX progress.');
+            document.getElementById('waitlist-form').reset();
         });
-    });
-</script>
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

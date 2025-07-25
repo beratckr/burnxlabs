@@ -1,0 +1,58 @@
+---
+---
+
+<div id="waitlist" class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 max-w-md mx-auto">
+    <form id="waitlist-form" class="space-y-4">
+        <input 
+            type="email" 
+            id="email" 
+            name="email"
+            placeholder="Enter your email" 
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
+        />
+        <input 
+            type="text" 
+            id="firstName" 
+            name="firstName"
+            placeholder="First name (optional)" 
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
+        />
+        <button 
+            type="submit" 
+            class="w-full bg-gray-900 text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
+        >
+            Join the waitlist
+        </button>
+    </form>
+    
+    <p class="text-sm text-gray-500 mt-4">
+        Get early access and launch updates. No spam, unsubscribe anytime.
+    </p>
+</div>
+
+<script>
+    const form = document.getElementById('waitlist-form') as HTMLFormElement;
+    
+    form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const email = formData.get('email');
+        const firstName = formData.get('firstName');
+        
+        if (!email) {
+            alert('Please enter your email address.');
+            return;
+        }
+        
+        try {
+            // For now, we'll just show a success message
+            // In production, this would integrate with ConvertKit or another email service
+            alert('Thank you for joining our waitlist! We\'ll keep you updated on BurnX progress.');
+            form.reset();
+        } catch (error) {
+            alert('Something went wrong. Please try again.');
+        }
+    });
+</script>

@@ -1,0 +1,158 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Mock blog posts data - in production, this would come from a CMS or markdown files
+const blogPosts = [
+    {
+        slug: 'why-beginners-fail-at-fitness',
+        title: 'Why 80% of Beginners Quit Fitness Apps (And How We\'re Different)',
+        excerpt: 'Traditional fitness apps are built for people who already know what they\'re doing. Here\'s why that\'s a problem and how BurnX is changing the game.',
+        date: 'December 15, 2024',
+        author: 'Sarah Chen',
+        category: 'Fitness',
+        readTime: '5 min read',
+        featured: true
+    },
+    {
+        slug: 'ai-personal-trainer-future',
+        title: 'The Future of Fitness: How AI Can Be Your Perfect Personal Trainer',
+        excerpt: 'Discover how artificial intelligence is revolutionizing personalized fitness coaching and making expert guidance accessible to everyone.',
+        date: 'December 10, 2024',
+        author: 'Marcus Johnson',
+        category: 'Technology',
+        readTime: '7 min read',
+        featured: false
+    },
+    {
+        slug: 'starting-fitness-journey-tips',
+        title: '10 Things I Wish I Knew Before Starting My Fitness Journey',
+        excerpt: 'From a complete beginner to fitness enthusiast - here are the lessons that would have saved me years of frustration.',
+        date: 'December 5, 2024',
+        author: 'Dr. Emily Rodriguez',
+        category: 'Beginner Tips',
+        readTime: '6 min read',
+        featured: false
+    },
+    {
+        slug: 'nutrition-basics-beginners',
+        title: 'Nutrition Doesn\'t Have to Be Complicated: A Beginner\'s Guide',
+        excerpt: 'Forget counting macros and complex meal plans. Here\'s how to eat better without the overwhelm.',
+        date: 'November 28, 2024',
+        author: 'Dr. Emily Rodriguez',
+        category: 'Nutrition',
+        readTime: '8 min read',
+        featured: false
+    }
+];
+
+const featuredPost = blogPosts.find(post => post.featured);
+const regularPosts = blogPosts.filter(post => !post.featured);
+---
+
+<Layout title="Blog - BurnXLabs" description="Insights, tips, and stories about fitness for beginners from the BurnXLabs team.">
+    <!-- Hero Section -->
+    <section class="pt-16 pb-20 px-6 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                The BurnX Blog
+            </h1>
+            <p class="text-xl text-gray-600 leading-relaxed">
+                Insights, tips, and stories to help you start and maintain your fitness journey.
+            </p>
+        </div>
+    </section>
+
+    <!-- Featured Post -->
+    {featuredPost && (
+        <section class="py-12 px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="bg-gradient-to-r from-blue-600 to-pink-500 rounded-2xl overflow-hidden">
+                    <div class="p-12 text-white">
+                        <div class="flex items-center space-x-4 mb-6">
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium">
+                                Featured Post
+                            </span>
+                            <span class="text-sm opacity-90">{featuredPost.category}</span>
+                        </div>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                            <a href={`/blog/${featuredPost.slug}`} class="no-underline hover:opacity-90">
+                                {featuredPost.title}
+                            </a>
+                        </h2>
+                        <p class="text-lg mb-6 opacity-95 leading-relaxed max-w-3xl">
+                            {featuredPost.excerpt}
+                        </p>
+                        <div class="flex items-center space-x-4 text-sm">
+                            <span>{featuredPost.author}</span>
+                            <span>•</span>
+                            <span>{featuredPost.date}</span>
+                            <span>•</span>
+                            <span>{featuredPost.readTime}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )}
+
+    <!-- Blog Posts Grid -->
+    <section class="py-12 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {regularPosts.map((post) => (
+                    <article class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow">
+                        <div class="p-8">
+                            <div class="flex items-center space-x-4 mb-4">
+                                <span class="text-sm font-medium text-blue-600">{post.category}</span>
+                                <span class="text-sm text-gray-500">{post.readTime}</span>
+                            </div>
+                            <h2 class="text-xl font-bold text-gray-900 mb-3">
+                                <a href={`/blog/${post.slug}`} class="no-underline hover:text-blue-600 transition-colors">
+                                    {post.title}
+                                </a>
+                            </h2>
+                            <p class="text-gray-600 mb-6 leading-relaxed">
+                                {post.excerpt}
+                            </p>
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <span>{post.author}</span>
+                                <span>{post.date}</span>
+                            </div>
+                        </div>
+                    </article>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-20 px-6 bg-gray-50">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">
+                Stay Updated
+            </h2>
+            <p class="text-lg text-gray-600 mb-8">
+                Get the latest fitness tips and BurnX updates delivered to your inbox.
+            </p>
+            
+            <form class="max-w-md mx-auto flex gap-4">
+                <input
+                    type="email"
+                    placeholder="Enter your email"
+                    required
+                    class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
+                />
+                <button
+                    type="submit"
+                    class="bg-gray-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
+                >
+                    Subscribe
+                </button>
+            </form>
+            
+            <p class="text-sm text-gray-500 mt-4">
+                No spam, unsubscribe anytime.
+            </p>
+        </div>
+    </section>
+</Layout>

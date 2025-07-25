@@ -2,15 +2,21 @@
 
 @theme {
     --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    --color-primary: #f67280;
-    --color-primary-content: #101828;
-    --color-complementary: #355c7d;
-    --background-image-noise: linear-gradient(
-            to bottom,
-            color-mix(in oklab, var(--color-gray-950) 0%, transparent),
-            color-mix(in oklab, var(--color-gray-950) 100%, transparent)
-        ),
-        url('/images/noise.png');
+    --font-inter: 'Inter', 'Inter Variable', system-ui, sans-serif;
+    
+    /* Primary blues */
+    --color-primary-50: #f0f9ff;
+    --color-primary-100: #e0f2fe;
+    --color-primary-500: #0ea5e9;
+    --color-primary-600: #0284c7;
+    --color-primary-700: #0369a1;
+    --color-primary-900: #0c4a6e;
+    
+    /* Accent pinks */
+    --color-accent-100: #fce7f3;
+    --color-accent-400: #fb7185;
+    --color-accent-500: #f43f5e;
+    --color-accent-600: #e11d48;
 }
 
 @layer base {
@@ -23,7 +29,7 @@
     }
 
     a:not(.btn) {
-        @apply underline transition hover:opacity-80;
+        @apply underline-offset-2 transition hover:opacity-80;
     }
 
     pre {
@@ -31,7 +37,7 @@
     }
 
     :not(pre) > code {
-        @apply px-1 py-0.5 font-mono rounded bg-gray-900 text-primary;
+        @apply px-1 py-0.5 font-mono rounded bg-gray-100 text-gray-900;
         font-size: 0.9em;
     }
 }
@@ -56,17 +62,16 @@
     }
 
     .btn {
-        @apply inline-flex items-center justify-center gap-2 bg-primary text-primary-content cursor-pointer text-center font-semibold no-underline transition-colors;
-        padding: var(--btn-py, 0.875rem) var(--btn-px, 1.25rem);
+        @apply inline-flex items-center justify-center gap-2 bg-gray-900 text-white cursor-pointer text-center font-medium no-underline transition-colors rounded-lg;
+        padding: var(--btn-py, 0.75rem) var(--btn-px, 1.5rem);
         font-size: var(--btn-font-size, 0.875rem);
-        border-radius: var(--btn-border-radius, 0.25rem);
 
         &:hover {
-            @apply bg-primary/85;
+            @apply bg-gray-800;
         }
 
         &:disabled {
-            @apply text-gray-400 bg-gray-700;
+            @apply text-gray-400 bg-gray-300;
         }
     }
 
