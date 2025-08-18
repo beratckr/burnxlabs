@@ -93,13 +93,131 @@
         "readMore": "Devamını Oku"
     },
     "contact": {
+        "pageTitle": "İletişim - BurnXLabs",
         "title": "İletişime Geçin",
-        "subtitle": "Sizden haber almak isteriz",
+        "subtitle": "BurnX hakkında sorularınız mı var? Bizimle ortak olmak mı istiyorsunuz? Sizden haber almayı çok isteriz.",
+        "letsConnect": "Bağlantı Kuralım",
+        "email": {
+            "title": "E-posta",
+            "address": "hello@burnxlabs.com",
+            "description": "24 saat içinde yanıt vereceğiz"
+        },
+        "press": {
+            "title": "Basın İletişimi",
+            "address": "press@burnxlabs.com",
+            "description": "Medya ve basın ile ilgili sorular için"
+        },
+        "partnerships": {
+            "title": "Ortaklıklar",
+            "address": "partners@burnxlabs.com",
+            "description": "İş geliştirme fırsatları"
+        },
+        "social": {
+            "title": "Bizi Takip Edin"
+        },
         "form": {
-            "name": "İsim",
+            "title": "Bize mesaj gönderin",
+            "firstName": "Ad",
+            "lastName": "Soyad",
             "email": "E-posta",
+            "subject": "Konu",
+            "selectTopic": "Bir konu seçin",
+            "general": "Genel Soru",
+            "support": "Destek",
+            "partnership": "Ortaklık",
+            "press": "Basın",
+            "other": "Diğer",
             "message": "Mesaj",
-            "send": "Mesaj Gönder"
+            "send": "Mesaj Gönder",
+            "success": "Mesajınız için teşekkürler! En kısa sürede size döneceğiz.",
+            "error": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin veya bize doğrudan e-posta gönderin."
+        }
+    },
+    "faq": {
+        "pageTitle": "SSS - BurnXLabs",
+        "title": "Sıkça Sorulan Sorular",
+        "subtitle": "BurnX hakkında bilmeniz gereken her şey",
+        "q1": {
+            "question": "BurnX ne zaman çıkacak?",
+            "answer": "Ekim 2025'te lansmanı planlıyoruz. Canlıya geçtiğimizde ilk haberdar olanlardan olmak için bekleme listemize katılın!"
+        },
+        "q2": {
+            "question": "BurnX hangi platformlarda kullanılabilir olacak?",
+            "answer": "BurnX lansmanda hem iOS hem de Android'de mevcut olacak. En iyi deneyim için yerel uygulamalar geliştiriyoruz."
+        },
+        "q3": {
+            "question": "BurnX'in fiyatı ne kadar olacak?",
+            "answer": "Fiyatlandırmamızı hala belirliyoruz, ancak BurnX'i uygun fiyatlı ve erişilebilir kılmaya kararlıyız. Erken bekleme listesi üyeleri özel lansman fiyatlandırması alacak."
+        },
+        "q4": {
+            "question": "BurnX gerçekten tam yeni başlayanlar için mi?",
+            "answer": "Kesinlikle! BurnX, daha önce hiç egzersiz yapmamış kişiler için sıfırdan tasarlandı. Temellerden başlıyor ve sizin hızınıza göre ilerliyoruz."
+        },
+        "q5": {
+            "question": "BurnX'i ekipman olmadan kullanabilir miyim?",
+            "answer": "Evet! BurnX, herhangi bir ekipman gerektirmeyen vücut ağırlığı egzersizleri sunar. İlerledikçe, antrenmanlarınızı geliştirmek için isteğe bağlı ekipmanlar önereceğiz."
+        },
+        "q6": {
+            "question": "Yapay zeka koçluğu nasıl çalışır?",
+            "answer": "Yapay zekamız, kişiselleştirilmiş antrenman planları oluşturmak için fitness seviyenizi, hedeflerinizi ve ilerlemenizi analiz eder. Geri bildiriminize ve performansınıza göre gerçek zamanlı olarak uyum sağlar."
+        },
+        "stillHaveQuestions": "Hala sorularınız mı var?",
+        "contactUs": "Bizimle iletişime geçin"
+    },
+    "privacy": {
+        "pageTitle": "Gizlilik Politikası - BurnXLabs",
+        "title": "Gizlilik Politikası",
+        "lastUpdated": "Son güncelleme: Ocak 2025",
+        "intro": "BurnXLabs (\"biz\" veya \"bizim\") gizliliğinizi korumaya kararlıdır. Bu Gizlilik Politikası, web sitemizi ve hizmetlerimizi kullandığınızda sizinle ilgili bilgileri nasıl topladığımızı, kullandığımızı ve paylaştığımızı açıklar.",
+        "sections": {
+            "collection": {
+                "title": "Topladığımız Bilgiler",
+                "content": "Bekleme listemize katıldığınızda veya bizimle iletişime geçtiğinizde doğrudan sağladığınız bilgileri toplarız. Bu, adınız, e-posta adresiniz ve sağlamayı seçtiğiniz diğer bilgileri içerebilir."
+            },
+            "use": {
+                "title": "Bilgilerinizi Nasıl Kullanıyoruz",
+                "content": "Topladığımız bilgileri hizmetlerimizi sağlamak ve geliştirmek, sizinle iletişim kurmak ve yasal yükümlülüklere uymak için kullanırız."
+            },
+            "sharing": {
+                "title": "Bilgi Paylaşımı",
+                "content": "Kişisel bilgilerinizi üçüncü taraflara satmıyor veya kiralamıyoruz. Yasal yükümlülüklere uymak gibi belirli sınırlı durumlarda bilgilerinizi paylaşabiliriz."
+            },
+            "security": {
+                "title": "Veri Güvenliği",
+                "content": "Kişisel bilgilerinizi yetkisiz erişim, değişiklik, ifşa veya imhaya karşı korumak için uygun teknik ve organizasyonel önlemler uyguluyoruz."
+            },
+            "contact": {
+                "title": "Bize Ulaşın",
+                "content": "Bu Gizlilik Politikası hakkında sorularınız varsa, lütfen privacy@burnxlabs.com adresinden bize ulaşın."
+            }
+        }
+    },
+    "terms": {
+        "pageTitle": "Kullanım Koşulları - BurnXLabs",
+        "title": "Kullanım Koşulları",
+        "lastUpdated": "Son güncelleme: Ocak 2025",
+        "intro": "BurnXLabs hizmetlerini kullanarak bu Kullanım Koşullarını kabul etmiş olursunuz. Lütfen dikkatlice okuyun.",
+        "sections": {
+            "acceptance": {
+                "title": "Koşulların Kabulü",
+                "content": "Hizmetlerimize erişerek veya kullanarak, bu Koşullar ve Gizlilik Politikamıza bağlı olmayı kabul edersiniz."
+            },
+            "eligibility": {
+                "title": "Uygunluk",
+                "content": "Hizmetlerimizi kullanmak için en az 18 yaşında olmalısınız. Hizmetlerimizi kullanarak, bu yaş şartını karşıladığınızı beyan edersiniz."
+            },
+            "intellectual": {
+                "title": "Fikri Mülkiyet",
+                "content": "Platformumuzdaki metin, grafikler, logolar ve yazılım dahil tüm içerik BurnXLabs'ın mülkiyetindedir ve fikri mülkiyet yasalarıyla korunmaktadır."
+            },
+            "disclaimer": {
+                "title": "Sorumluluk Reddi",
+                "content": "Hizmetlerimiz herhangi bir garanti olmaksızın \"olduğu gibi\" sağlanmaktadır. Belirli fitness sonuçlarını garanti etmiyoruz."
+            },
+            "contact": {
+                "title": "İletişim",
+                "content": "Bu Koşullar hakkında sorularınız için lütfen legal@burnxlabs.com adresinden bize ulaşın."
+            }
         }
     }
 }
