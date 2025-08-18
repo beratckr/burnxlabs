@@ -1,4 +1,18 @@
 export default async (request, context) => {
+    const url = new URL(request.url);
+    const pathname = url.pathname;
+    
+    // Skip processing for static assets and special paths
+    const staticExtensions = ['.css', '.js', '.mjs', '.jsx', '.ts', '.tsx', '.json', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.woff', '.woff2', '.ttf', '.otf', '.map'];
+    const specialPaths = ['/_astro/', '/node_modules/', '/@vite/', '/@fs/', '/src/'];
+    
+    const hasStaticExtension = staticExtensions.some(ext => pathname.endsWith(ext));
+    const isSpecialPath = specialPaths.some(path => pathname.includes(path));
+    
+    if (hasStaticExtension || isSpecialPath) {
+        return context.next();
+    }
+    
     const country = context.geo?.country?.code || 'US';
     
     const countryToLanguage = {
@@ -32,9 +46,6 @@ export default async (request, context) => {
     const cookieLang = context.cookies.get('lang');
     
     const finalLang = cookieLang || browserLang || detectedLang;
-    
-    const url = new URL(request.url);
-    const pathname = url.pathname;
     
     if (pathname === '/' || pathname === '') {
         return new Response(null, {

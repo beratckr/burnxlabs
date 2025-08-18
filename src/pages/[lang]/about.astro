@@ -1,0 +1,173 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations, getLangFromUrl } from '../../i18n/utils';
+import { languages } from '../../i18n/config';
+
+export function getStaticPaths() {
+    return Object.keys(languages).map((lang) => ({
+        params: { lang }
+    }));
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title={lang === 'tr' ? 'Hakkımızda - BurnXLabs' : 'About - BurnXLabs'}>
+    <!-- Hero Section -->
+    <section class="pt-16 pb-20 px-6 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                {lang === 'tr' ? 'Başlangıç fitness\'ının geleceğini inşa ediyoruz' : 'Building the future of beginner fitness'}
+            </h1>
+            <p class="text-xl text-gray-600 leading-relaxed">
+                {lang === 'tr' ? 
+                    'Fitness\'ı herkes için erişilebilir kılma misyonundayız, en çok ihtiyacı olanlardan başlayarak - tam yeni başlayanlar.' :
+                    'We\'re on a mission to make fitness accessible to everyone, starting with those who need it most - complete beginners.'}
+            </p>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">
+                        {lang === 'tr' ? 'Misyonumuz' : 'Our Mission'}
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        {lang === 'tr' ?
+                            'BurnXLabs\'ta, deneyim seviyesi veya geçmişi ne olursa olsun herkesin kişiselleştirilmiş fitness rehberliğine erişimi hak ettiğine inanıyoruz.' :
+                            'At BurnXLabs, we believe everyone deserves access to personalized fitness guidance, regardless of their experience level or background.'}
+                    </p>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        {lang === 'tr' ?
+                            'Geleneksel fitness uygulamaları ne yaptığınızı zaten bildiğinizi varsayar. Size karmaşık antrenmanlar sunar, kafa karıştırıcı terimler kullanır ve ayak uydurmanızı bekler. Biz farklıyız.' :
+                            'Traditional fitness apps assume you already know what you\'re doing. They throw complex workouts at you, use confusing terminology, and expect you to keep up. We\'re different.'}
+                    </p>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        {lang === 'tr' ?
+                            'BurnX, fitness yolculuğuna yeni başlayanlar için sıfırdan tasarlandı. Yapay zeka koçumuz "superset"in ne olduğunu veya şınavın nasıl düzgün yapıldığını bilmeyebileceğinizi anlıyor. Ve bu tamamen normal.' :
+                            'BurnX is built from the ground up for people who are just starting their fitness journey. Our AI coach understands that you might not know what a "superset" is, or how to properly do a push-up. And that\'s perfectly okay.'}
+                    </p>
+                </div>
+                <div class="bg-gradient-to-br from-blue-50 to-pink-50 rounded-2xl p-12 text-center">
+                    <div class="text-6xl font-bold bg-gradient-to-r from-blue-600 to-pink-500 bg-clip-text text-transparent mb-4">
+                        500K+
+                    </div>
+                    <p class="text-xl text-gray-700">
+                        {lang === 'tr' ?
+                            'İnsan fitness yolculuğuna başlamak istiyor ama nereden başlayacağını bilmiyor' :
+                            'People want to start their fitness journey but don\'t know where to begin'}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-20 px-6 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-16">
+                {lang === 'tr' ? 'Değerlerimiz' : 'Our Values'}
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-8">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                        {lang === 'tr' ? 'Kapsayıcılık' : 'Inclusivity'}
+                    </h3>
+                    <p class="text-gray-600">
+                        {lang === 'tr' ?
+                            'Fitness herkes içindir. Yaş, yetenek veya geçmiş önemli değil - hepimiz bir yerden başlarız.' :
+                            'Fitness is for everyone. No matter your age, ability, or background - we all start somewhere.'}
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-8">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                        {lang === 'tr' ? 'Basitlik' : 'Simplicity'}
+                    </h3>
+                    <p class="text-gray-600">
+                        {lang === 'tr' ?
+                            'Fitness\'ı karmaşık hale getirmiyoruz. Net rehberlik, basit adımlar ve anlaşılır ilerleme.' :
+                            'We don\'t overcomplicate fitness. Clear guidance, simple steps, and understandable progress.'}
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-8">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                        {lang === 'tr' ? 'Empati' : 'Empathy'}
+                    </h3>
+                    <p class="text-gray-600">
+                        {lang === 'tr' ?
+                            'Başlamanın ne kadar zor olduğunu anlıyoruz. Yapay zekamız eleştirmez, yargılamaz - sadece destekler.' :
+                            'We understand how hard it is to start. Our AI doesn\'t judge or criticize - it just supports.'}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">
+                    {lang === 'tr' ? 'Ekibimiz' : 'Our Team'}
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    {lang === 'tr' ?
+                        'Fitness meraklıları, yapay zeka mühendisleri ve sağlık uzmanlarından oluşan tutkulu bir ekibiz.' :
+                        'We\'re a passionate team of fitness enthusiasts, AI engineers, and health experts.'}
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <p class="text-gray-600 mb-8">
+                    {lang === 'tr' ?
+                        'Ekibimiz San Francisco ve İstanbul\'da konumlanmış olup, herkes için fitness\'ı erişilebilir kılmak için çalışıyor.' :
+                        'Our team is based in San Francisco and Istanbul, working to make fitness accessible for everyone.'}
+                </p>
+                <a href={`/${lang}/contact`} class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium">
+                    {lang === 'tr' ? 'Bizimle iletişime geçin' : 'Get in touch with us'}
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6 bg-gradient-to-r from-blue-600 to-pink-500">
+        <div class="max-w-4xl mx-auto text-center text-white">
+            <h2 class="text-3xl font-bold mb-4">
+                {lang === 'tr' ? 'Yolculuğunuza bizimle başlayın' : 'Start your journey with us'}
+            </h2>
+            <p class="text-xl mb-8 opacity-90">
+                {lang === 'tr' ? 
+                    'İlk kullanıcılarımız arasında yer alın ve özel erişim kazanın.' :
+                    'Be among our first users and get exclusive early access.'}
+            </p>
+            <a href={`/${lang}/#waitlist`} class="inline-block bg-white text-gray-900 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                {t('hero.cta')}
+            </a>
+        </div>
+    </section>
+</Layout>
