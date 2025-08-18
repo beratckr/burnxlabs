@@ -93,13 +93,131 @@
         "readMore": "Read More"
     },
     "contact": {
+        "pageTitle": "Contact - BurnXLabs",
         "title": "Get in Touch",
-        "subtitle": "We'd love to hear from you",
+        "subtitle": "Have questions about BurnX? Want to partner with us? We'd love to hear from you.",
+        "letsConnect": "Let's Connect",
+        "email": {
+            "title": "Email",
+            "address": "hello@burnxlabs.com",
+            "description": "We'll respond within 24 hours"
+        },
+        "press": {
+            "title": "Press Inquiries",
+            "address": "press@burnxlabs.com",
+            "description": "For media and press related questions"
+        },
+        "partnerships": {
+            "title": "Partnerships",
+            "address": "partners@burnxlabs.com",
+            "description": "Business development opportunities"
+        },
+        "social": {
+            "title": "Follow Us"
+        },
         "form": {
-            "name": "Name",
+            "title": "Send us a message",
+            "firstName": "First Name",
+            "lastName": "Last Name",
             "email": "Email",
+            "subject": "Subject",
+            "selectTopic": "Select a topic",
+            "general": "General Inquiry",
+            "support": "Support",
+            "partnership": "Partnership",
+            "press": "Press",
+            "other": "Other",
             "message": "Message",
-            "send": "Send Message"
+            "send": "Send Message",
+            "success": "Thank you for your message! We'll get back to you soon.",
+            "error": "Something went wrong. Please try again or email us directly."
+        }
+    },
+    "faq": {
+        "pageTitle": "FAQ - BurnXLabs",
+        "title": "Frequently Asked Questions",
+        "subtitle": "Everything you need to know about BurnX",
+        "q1": {
+            "question": "When will BurnX launch?",
+            "answer": "We're planning to launch in October 2025. Join our waitlist to be the first to know when we go live!"
+        },
+        "q2": {
+            "question": "What platforms will BurnX be available on?",
+            "answer": "BurnX will be available on both iOS and Android at launch. We're building native apps for the best possible experience."
+        },
+        "q3": {
+            "question": "How much will BurnX cost?",
+            "answer": "We're still finalizing our pricing, but we're committed to making BurnX affordable and accessible. Early waitlist members will get special launch pricing."
+        },
+        "q4": {
+            "question": "Is BurnX really for complete beginners?",
+            "answer": "Absolutely! BurnX is designed from the ground up for people who have never worked out before. We start with the basics and progress at your pace."
+        },
+        "q5": {
+            "question": "Can I use BurnX without any equipment?",
+            "answer": "Yes! BurnX offers bodyweight workouts that don't require any equipment. As you progress, we'll suggest optional equipment to enhance your workouts."
+        },
+        "q6": {
+            "question": "How does the AI coaching work?",
+            "answer": "Our AI analyzes your fitness level, goals, and progress to create personalized workout plans. It adapts in real-time based on your feedback and performance."
+        },
+        "stillHaveQuestions": "Still have questions?",
+        "contactUs": "Contact us"
+    },
+    "privacy": {
+        "pageTitle": "Privacy Policy - BurnXLabs",
+        "title": "Privacy Policy",
+        "lastUpdated": "Last updated: January 2025",
+        "intro": "BurnXLabs (\"we,\" \"our,\" or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and share information about you when you use our website and services.",
+        "sections": {
+            "collection": {
+                "title": "Information We Collect",
+                "content": "We collect information you provide directly, such as when you join our waitlist or contact us. This may include your name, email address, and any other information you choose to provide."
+            },
+            "use": {
+                "title": "How We Use Your Information",
+                "content": "We use the information we collect to provide and improve our services, communicate with you, and comply with legal obligations."
+            },
+            "sharing": {
+                "title": "Information Sharing",
+                "content": "We do not sell or rent your personal information to third parties. We may share your information in certain limited circumstances, such as to comply with legal obligations."
+            },
+            "security": {
+                "title": "Data Security",
+                "content": "We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction."
+            },
+            "contact": {
+                "title": "Contact Us",
+                "content": "If you have any questions about this Privacy Policy, please contact us at privacy@burnxlabs.com."
+            }
+        }
+    },
+    "terms": {
+        "pageTitle": "Terms of Service - BurnXLabs",
+        "title": "Terms of Service",
+        "lastUpdated": "Last updated: January 2025",
+        "intro": "By using BurnXLabs services, you agree to these Terms of Service. Please read them carefully.",
+        "sections": {
+            "acceptance": {
+                "title": "Acceptance of Terms",
+                "content": "By accessing or using our services, you agree to be bound by these Terms and our Privacy Policy."
+            },
+            "eligibility": {
+                "title": "Eligibility",
+                "content": "You must be at least 18 years old to use our services. By using our services, you represent that you meet this age requirement."
+            },
+            "intellectual": {
+                "title": "Intellectual Property",
+                "content": "All content on our platform, including text, graphics, logos, and software, is the property of BurnXLabs and is protected by intellectual property laws."
+            },
+            "disclaimer": {
+                "title": "Disclaimer",
+                "content": "Our services are provided \"as is\" without warranties of any kind. We do not guarantee specific fitness results."
+            },
+            "contact": {
+                "title": "Contact",
+                "content": "For questions about these Terms, please contact us at legal@burnxlabs.com."
+            }
         }
     }
 }

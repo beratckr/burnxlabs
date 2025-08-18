@@ -360,66 +360,8 @@ const texts = formTranslations[lang] || formTranslations.en;
             return;
         }
         
-        // Check if email already exists in localStorage
-        const storageKey = 'waitlist_submissions';
-        let submissions = [];
-        try {
-            const stored = localStorage.getItem(storageKey);
-            if (stored) {
-                submissions = JSON.parse(stored);
-            }
-        } catch (e) {
-            console.error('Error parsing stored submissions:', e);
-            submissions = [];
-        }
-        
-        console.log('Existing submissions:', submissions);
-        console.log('Checking for email:', email);
-        
-        let existingSubmission = null;
-        for (let i = 0; i < submissions.length; i++) {
-            if (submissions[i] && submissions[i].email && 
-                submissions[i].email.toLowerCase() === email.toLowerCase()) {
-                existingSubmission = submissions[i];
-                break;
-            }
-        }
-        
-        if (existingSubmission) {
-            console.log('Duplicate found! Blocking submission to Netlify.');
-            // Email already exists - show different message
-            const successTitle = document.querySelector('#success-container h3');
-            const successDesc = document.querySelector('#success-container p:nth-of-type(2)');
-            
-            if (successTitle) {
-                successTitle.textContent = successTitle.getAttribute('data-already-text') || 'You\'re already on the list! 👋';
-            }
-            if (successDesc) {
-                successDesc.textContent = successDesc.getAttribute('data-already-text') || 'We have your email and you\'ll be among the first to know when BurnX launches!';
-            }
-            
-            // Show user's email
-            if (userEmailSpan) {
-                userEmailSpan.textContent = email;
-            }
-            
-            // Animate transition directly without API call
-            if (formContainer) formContainer.classList.add('opacity-0', 'scale-95');
-            
-            setTimeout(function() {
-                if (formContainer) formContainer.classList.add('hidden');
-                if (successContainer) {
-                    successContainer.classList.remove('hidden');
-                    
-                    setTimeout(function() {
-                        successContainer.classList.remove('opacity-0');
-                        successContainer.classList.add('opacity-100', 'scale-100');
-                    }, 50);
-                }
-            }, 300);
-            
-            return; // Exit early, no need to submit again
-        }
+        // No duplicate checking - let Netlify handle it server-side
+        console.log('Submitting to Netlify...');
         
         // Show loading state for new submissions
         console.log('New submission, sending to Netlify...');
@@ -436,7 +378,7 @@ const texts = formTranslations[lang] || formTranslations.en;
             });
             
             if (response.ok) {
-                // Reset success message to default for new submissions
+                // Show success message
                 const successTitle = document.querySelector('#success-container h3');
                 const successDesc = document.querySelector('#success-container p:nth-of-type(2)');
                 
@@ -472,28 +414,7 @@ const texts = formTranslations[lang] || formTranslations.en;
                     }, 300);
                 }, 500);
                 
-                // Store submission in localStorage to prevent duplicates
-                // Re-fetch submissions to ensure we have the latest data
-                let updatedSubmissions = [];
-                try {
-                    const stored = localStorage.getItem('waitlist_submissions');
-                    if (stored) {
-                        updatedSubmissions = JSON.parse(stored);
-                    }
-                } catch (e) {
-                    console.error('Error parsing stored data:', e);
-                    updatedSubmissions = [];
-                }
-                
-                const newSubmission = { 
-                    email: email.toLowerCase(), // Store lowercase for consistent comparison
-                    firstName: firstName || '', // Ensure it's always a string
-                    timestamp: new Date().toISOString() 
-                };
-                
-                updatedSubmissions.push(newSubmission);
-                console.log('Storing new submission:', newSubmission);
-                localStorage.setItem('waitlist_submissions', JSON.stringify(updatedSubmissions));
+                // Don't store emails in localStorage - let server handle duplicate detection
                 
                 // Update rate limiting
                 updateRateLimit();
@@ -548,13 +469,6 @@ const texts = formTranslations[lang] || formTranslations.en;
         });
     }
     
-    // Check if user has already submitted
-    document.addEventListener('DOMContentLoaded', function() {
-        const submissions = JSON.parse(localStorage.getItem('waitlist_submissions') || '[]');
-        if (submissions.length > 0) {
-            // Could show a different message for returning users
-            console.log('User has already joined waitlist:', submissions);
-        }
-    });
+    // No need to check previous submissions - server handles everything
 })();
 </script>

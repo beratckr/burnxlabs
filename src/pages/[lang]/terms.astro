@@ -1,0 +1,97 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations, getLangFromUrl } from '../../i18n/utils';
+import { languages } from '../../i18n/config';
+
+export function getStaticPaths() {
+    return Object.keys(languages).map((lang) => ({
+        params: { lang }
+    }));
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title={t('terms.pageTitle')}>
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header -->
+            <div class="mb-12">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">
+                    {t('terms.title')}
+                </h1>
+                <p class="text-gray-600">
+                    {t('terms.lastUpdated')}
+                </p>
+            </div>
+
+            <!-- Introduction -->
+            <div class="prose prose-lg max-w-none text-gray-600">
+                <p class="mb-8 leading-relaxed">
+                    {t('terms.intro')}
+                </p>
+
+                <!-- Section 1: Acceptance of Terms -->
+                <div class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                        {t('terms.sections.acceptance.title')}
+                    </h2>
+                    <p class="leading-relaxed">
+                        {t('terms.sections.acceptance.content')}
+                    </p>
+                </div>
+
+                <!-- Section 2: Eligibility -->
+                <div class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                        {t('terms.sections.eligibility.title')}
+                    </h2>
+                    <p class="leading-relaxed">
+                        {t('terms.sections.eligibility.content')}
+                    </p>
+                </div>
+
+                <!-- Section 3: Intellectual Property -->
+                <div class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                        {t('terms.sections.intellectual.title')}
+                    </h2>
+                    <p class="leading-relaxed">
+                        {t('terms.sections.intellectual.content')}
+                    </p>
+                </div>
+
+                <!-- Section 4: Disclaimer -->
+                <div class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                        {t('terms.sections.disclaimer.title')}
+                    </h2>
+                    <p class="leading-relaxed">
+                        {t('terms.sections.disclaimer.content')}
+                    </p>
+                </div>
+
+                <!-- Section 5: Contact -->
+                <div class="mb-10">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                        {t('terms.sections.contact.title')}
+                    </h2>
+                    <p class="leading-relaxed">
+                        {t('terms.sections.contact.content')}
+                    </p>
+                </div>
+            </div>
+
+            <!-- Back to Home -->
+            <div class="mt-12 pt-8 border-t border-gray-200">
+                <a href={`/${lang}/`} class="text-blue-600 hover:text-blue-700 font-medium flex items-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    {lang === 'tr' ? 'Ana Sayfaya Dön' : 'Back to Home'}
+                </a>
+            </div>
+        </div>
+    </section>
+</Layout>
