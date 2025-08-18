@@ -277,8 +277,10 @@
         
         // Get form data
         const formData = new FormData(form);
-        const email = (formData.get('email') || '').trim();
-        const firstName = formData.get('firstName') || '';
+        const email = (formData.get('email') || '').toString().trim();
+        const firstName = (formData.get('firstName') || '').toString().trim();
+        
+        console.log('Form submitted - Email:', email, 'FirstName:', firstName);
         
         // Check rate limiting first
         const rateCheck = checkRateLimit();
@@ -319,13 +321,25 @@
         }
         
         // Check if email already exists in localStorage
-        const submissions = JSON.parse(localStorage.getItem('waitlist_submissions') || '[]');
+        const storageKey = 'waitlist_submissions';
+        let submissions = [];
+        try {
+            const stored = localStorage.getItem(storageKey);
+            if (stored) {
+                submissions = JSON.parse(stored);
+            }
+        } catch (e) {
+            console.error('Error parsing stored submissions:', e);
+            submissions = [];
+        }
+        
         console.log('Existing submissions:', submissions);
         console.log('Checking for email:', email);
         
         let existingSubmission = null;
         for (let i = 0; i < submissions.length; i++) {
-            if (submissions[i].email && submissions[i].email.toLowerCase() === email.toLowerCase()) {
+            if (submissions[i] && submissions[i].email && 
+                submissions[i].email.toLowerCase() === email.toLowerCase()) {
                 existingSubmission = submissions[i];
                 break;
             }
@@ -420,8 +434,25 @@
                 
                 // Store submission in localStorage to prevent duplicates
                 // Re-fetch submissions to ensure we have the latest data
-                const updatedSubmissions = JSON.parse(localStorage.getItem('waitlist_submissions') || '[]');
-                updatedSubmissions.push({ email: email, firstName: firstName, timestamp: new Date().toISOString() });
+                let updatedSubmissions = [];
+                try {
+                    const stored = localStorage.getItem('waitlist_submissions');
+                    if (stored) {
+                        updatedSubmissions = JSON.parse(stored);
+                    }
+                } catch (e) {
+                    console.error('Error parsing stored data:', e);
+                    updatedSubmissions = [];
+                }
+                
+                const newSubmission = { 
+                    email: email.toLowerCase(), // Store lowercase for consistent comparison
+                    firstName: firstName || '', // Ensure it's always a string
+                    timestamp: new Date().toISOString() 
+                };
+                
+                updatedSubmissions.push(newSubmission);
+                console.log('Storing new submission:', newSubmission);
                 localStorage.setItem('waitlist_submissions', JSON.stringify(updatedSubmissions));
                 
                 // Update rate limiting
