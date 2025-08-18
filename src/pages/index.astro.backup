@@ -1,0 +1,53 @@
+---
+// Root index page that redirects to the appropriate language version
+---
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Redirecting...</title>
+        <script>
+            // This will be handled by the Netlify Edge Function
+            // But we'll add client-side fallback just in case
+            
+            function detectLanguage() {
+                // Check stored preference first
+                const stored = localStorage.getItem('preferredLanguage');
+                if (stored === 'tr' || stored === 'en') {
+                    return stored;
+                }
+                
+                // Check cookie
+                const cookieValue = document.cookie
+                    .split('; ')
+                    .find(row => row.startsWith('lang='))
+                    ?.split('=')[1];
+                
+                if (cookieValue === 'tr' || cookieValue === 'en') {
+                    return cookieValue;
+                }
+                
+                // Check browser language
+                const browserLang = navigator.language || navigator.userLanguage;
+                const shortLang = browserLang.split('-')[0].toLowerCase();
+                
+                if (shortLang === 'tr') {
+                    return 'tr';
+                }
+                
+                // Default to English
+                return 'en';
+            }
+            
+            // Perform redirect
+            const lang = detectLanguage();
+            window.location.href = `/${lang}/`;
+        </script>
+    </head>
+    <body>
+        <div style="display: flex; align-items: center; justify-content: center; height: 100vh; font-family: system-ui;">
+            <p>Redirecting...</p>
+        </div>
+    </body>
+</html>
