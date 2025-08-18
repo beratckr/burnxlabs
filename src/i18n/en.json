@@ -48,13 +48,43 @@
     },
     "about": {
         "title": "About BurnXLabs",
+        "pageTitle": "About - BurnXLabs",
+        "hero": {
+            "title": "Building the future of beginner fitness",
+            "subtitle": "We're on a mission to make fitness accessible to everyone, starting with those who need it most - complete beginners."
+        },
         "mission": {
             "title": "Our Mission",
-            "content": "To democratize fitness and wellness through innovative AI technology, making personalized health optimization accessible to everyone."
+            "content1": "At BurnXLabs, we believe everyone deserves access to personalized fitness guidance, regardless of their experience level or background.",
+            "content2": "Traditional fitness apps assume you already know what you're doing. They throw complex workouts at you, use confusing terminology, and expect you to keep up. We're different.",
+            "content3": "BurnX is built from the ground up for people who are just starting their fitness journey. Our AI coach understands that you might not know what a \"superset\" is, or how to properly do a push-up. And that's perfectly okay.",
+            "stat": "500K+",
+            "statText": "People want to start their fitness journey but don't know where to begin"
+        },
+        "values": {
+            "title": "Our Values",
+            "inclusivity": {
+                "title": "Inclusivity",
+                "description": "Fitness is for everyone. No matter your age, ability, or background - we all start somewhere."
+            },
+            "simplicity": {
+                "title": "Simplicity",
+                "description": "We don't overcomplicate fitness. Clear guidance, simple steps, and understandable progress."
+            },
+            "empathy": {
+                "title": "Empathy",
+                "description": "We understand how hard it is to start. Our AI doesn't judge or criticize - it just supports."
+            }
         },
         "team": {
             "title": "Our Team",
-            "description": "A passionate group of fitness enthusiasts, AI engineers, and health experts working to revolutionize wellness."
+            "subtitle": "We're a passionate team of fitness enthusiasts, AI engineers, and health experts.",
+            "location": "Our team is based in San Francisco and Istanbul, working to make fitness accessible for everyone.",
+            "cta": "Get in touch with us"
+        },
+        "cta": {
+            "title": "Start your journey with us",
+            "subtitle": "Be among our first users and get exclusive early access."
         }
     },
     "blog": {

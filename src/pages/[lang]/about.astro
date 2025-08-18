@@ -13,17 +13,15 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<Layout title={lang === 'tr' ? 'Hakkımızda - BurnXLabs' : 'About - BurnXLabs'}>
+<Layout title={t('about.pageTitle')}>
     <!-- Hero Section -->
     <section class="pt-16 pb-20 px-6 bg-gradient-to-b from-gray-50 to-white">
         <div class="max-w-4xl mx-auto text-center">
             <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                {lang === 'tr' ? 'Başlangıç fitness\'ının geleceğini inşa ediyoruz' : 'Building the future of beginner fitness'}
+                {t('about.hero.title')}
             </h1>
             <p class="text-xl text-gray-600 leading-relaxed">
-                {lang === 'tr' ? 
-                    'Fitness\'ı herkes için erişilebilir kılma misyonundayız, en çok ihtiyacı olanlardan başlayarak - tam yeni başlayanlar.' :
-                    'We\'re on a mission to make fitness accessible to everyone, starting with those who need it most - complete beginners.'}
+                {t('about.hero.subtitle')}
             </p>
         </div>
     </section>
@@ -34,32 +32,24 @@ const t = useTranslations(lang);
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div>
                     <h2 class="text-3xl font-bold text-gray-900 mb-6">
-                        {lang === 'tr' ? 'Misyonumuz' : 'Our Mission'}
+                        {t('about.mission.title')}
                     </h2>
                     <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-                        {lang === 'tr' ?
-                            'BurnXLabs\'ta, deneyim seviyesi veya geçmişi ne olursa olsun herkesin kişiselleştirilmiş fitness rehberliğine erişimi hak ettiğine inanıyoruz.' :
-                            'At BurnXLabs, we believe everyone deserves access to personalized fitness guidance, regardless of their experience level or background.'}
+                        {t('about.mission.content1')}
                     </p>
                     <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-                        {lang === 'tr' ?
-                            'Geleneksel fitness uygulamaları ne yaptığınızı zaten bildiğinizi varsayar. Size karmaşık antrenmanlar sunar, kafa karıştırıcı terimler kullanır ve ayak uydurmanızı bekler. Biz farklıyız.' :
-                            'Traditional fitness apps assume you already know what you\'re doing. They throw complex workouts at you, use confusing terminology, and expect you to keep up. We\'re different.'}
+                        {t('about.mission.content2')}
                     </p>
                     <p class="text-lg text-gray-600 leading-relaxed">
-                        {lang === 'tr' ?
-                            'BurnX, fitness yolculuğuna yeni başlayanlar için sıfırdan tasarlandı. Yapay zeka koçumuz "superset"in ne olduğunu veya şınavın nasıl düzgün yapıldığını bilmeyebileceğinizi anlıyor. Ve bu tamamen normal.' :
-                            'BurnX is built from the ground up for people who are just starting their fitness journey. Our AI coach understands that you might not know what a "superset" is, or how to properly do a push-up. And that\'s perfectly okay.'}
+                        {t('about.mission.content3')}
                     </p>
                 </div>
                 <div class="bg-gradient-to-br from-blue-50 to-pink-50 rounded-2xl p-12 text-center">
                     <div class="text-6xl font-bold bg-gradient-to-r from-blue-600 to-pink-500 bg-clip-text text-transparent mb-4">
-                        500K+
+                        {t('about.mission.stat')}
                     </div>
                     <p class="text-xl text-gray-700">
-                        {lang === 'tr' ?
-                            'İnsan fitness yolculuğuna başlamak istiyor ama nereden başlayacağını bilmiyor' :
-                            'People want to start their fitness journey but don\'t know where to begin'}
+                        {t('about.mission.statText')}
                     </p>
                 </div>
             </div>
@@ -70,7 +60,7 @@ const t = useTranslations(lang);
     <section class="py-20 px-6 bg-gray-50">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-16">
-                {lang === 'tr' ? 'Değerlerimiz' : 'Our Values'}
+                {t('about.values.title')}
             </h2>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-white rounded-xl p-8">
@@ -80,12 +70,10 @@ const t = useTranslations(lang);
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-3">
-                        {lang === 'tr' ? 'Kapsayıcılık' : 'Inclusivity'}
+                        {t('about.values.inclusivity.title')}
                     </h3>
                     <p class="text-gray-600">
-                        {lang === 'tr' ?
-                            'Fitness herkes içindir. Yaş, yetenek veya geçmiş önemli değil - hepimiz bir yerden başlarız.' :
-                            'Fitness is for everyone. No matter your age, ability, or background - we all start somewhere.'}
+                        {t('about.values.inclusivity.description')}
                     </p>
                 </div>
 
@@ -96,12 +84,10 @@ const t = useTranslations(lang);
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-3">
-                        {lang === 'tr' ? 'Basitlik' : 'Simplicity'}
+                        {t('about.values.simplicity.title')}
                     </h3>
                     <p class="text-gray-600">
-                        {lang === 'tr' ?
-                            'Fitness\'ı karmaşık hale getirmiyoruz. Net rehberlik, basit adımlar ve anlaşılır ilerleme.' :
-                            'We don\'t overcomplicate fitness. Clear guidance, simple steps, and understandable progress.'}
+                        {t('about.values.simplicity.description')}
                     </p>
                 </div>
 
@@ -112,12 +98,10 @@ const t = useTranslations(lang);
                         </svg>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-3">
-                        {lang === 'tr' ? 'Empati' : 'Empathy'}
+                        {t('about.values.empathy.title')}
                     </h3>
                     <p class="text-gray-600">
-                        {lang === 'tr' ?
-                            'Başlamanın ne kadar zor olduğunu anlıyoruz. Yapay zekamız eleştirmez, yargılamaz - sadece destekler.' :
-                            'We understand how hard it is to start. Our AI doesn\'t judge or criticize - it just supports.'}
+                        {t('about.values.empathy.description')}
                     </p>
                 </div>
             </div>
@@ -129,23 +113,19 @@ const t = useTranslations(lang);
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-3xl font-bold text-gray-900 mb-4">
-                    {lang === 'tr' ? 'Ekibimiz' : 'Our Team'}
+                    {t('about.team.title')}
                 </h2>
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    {lang === 'tr' ?
-                        'Fitness meraklıları, yapay zeka mühendisleri ve sağlık uzmanlarından oluşan tutkulu bir ekibiz.' :
-                        'We\'re a passionate team of fitness enthusiasts, AI engineers, and health experts.'}
+                    {t('about.team.subtitle')}
                 </p>
             </div>
             
             <div class="text-center">
                 <p class="text-gray-600 mb-8">
-                    {lang === 'tr' ?
-                        'Ekibimiz San Francisco ve İstanbul\'da konumlanmış olup, herkes için fitness\'ı erişilebilir kılmak için çalışıyor.' :
-                        'Our team is based in San Francisco and Istanbul, working to make fitness accessible for everyone.'}
+                    {t('about.team.location')}
                 </p>
                 <a href={`/${lang}/contact`} class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium">
-                    {lang === 'tr' ? 'Bizimle iletişime geçin' : 'Get in touch with us'}
+                    {t('about.team.cta')}
                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
@@ -158,12 +138,10 @@ const t = useTranslations(lang);
     <section class="py-20 px-6 bg-gradient-to-r from-blue-600 to-pink-500">
         <div class="max-w-4xl mx-auto text-center text-white">
             <h2 class="text-3xl font-bold mb-4">
-                {lang === 'tr' ? 'Yolculuğunuza bizimle başlayın' : 'Start your journey with us'}
+                {t('about.cta.title')}
             </h2>
             <p class="text-xl mb-8 opacity-90">
-                {lang === 'tr' ? 
-                    'İlk kullanıcılarımız arasında yer alın ve özel erişim kazanın.' :
-                    'Be among our first users and get exclusive early access.'}
+                {t('about.cta.subtitle')}
             </p>
             <a href={`/${lang}/#waitlist`} class="inline-block bg-white text-gray-900 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
                 {t('hero.cta')}
