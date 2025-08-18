@@ -1,4 +1,44 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Define translations for the form
+const formTranslations = {
+    en: {
+        emailPlaceholder: "Enter your email",
+        firstNamePlaceholder: "First name (optional)",
+        submitButton: "Join the waitlist",
+        disclaimer: "Get early access and launch updates. No spam, unsubscribe anytime.",
+        successTitle: "You're on the list! 🎉",
+        successMessage: "We've added",
+        successMessage2: "to our waitlist.",
+        successMessage3: "You'll be the first to know when BurnX launches!",
+        alreadyOnList: "You're already on the list! 👋",
+        alreadyMessage: "We have your email and you'll be among the first to know when BurnX launches!",
+        addAnother: "+ Add another email",
+        emailError: "Please enter a valid email address",
+        emailErrorTemp: "Please use a valid email address (no temporary emails)"
+    },
+    tr: {
+        emailPlaceholder: "E-posta adresinizi girin",
+        firstNamePlaceholder: "Adınız (isteğe bağlı)",
+        submitButton: "Bekleme listesine katıl",
+        disclaimer: "Erken erişim ve lansman güncellemeleri alın. Spam yok, istediğiniz zaman aboneliği iptal edebilirsiniz.",
+        successTitle: "Listedesiniz! 🎉",
+        successMessage: "",
+        successMessage2: "adresini bekleme listemize ekledik.",
+        successMessage3: "BurnX lansmanında ilk siz haberdar olacaksınız!",
+        alreadyOnList: "Zaten listedesiniz! 👋",
+        alreadyMessage: "E-postanız kayıtlı ve BurnX lansmanında ilk haberdar olacaksınız!",
+        addAnother: "+ Başka bir e-posta ekle",
+        emailError: "Lütfen geçerli bir e-posta adresi girin",
+        emailErrorTemp: "Lütfen geçerli bir e-posta adresi kullanın (geçici e-postalar kabul edilmez)"
+    }
+};
+
+const texts = formTranslations[lang] || formTranslations.en;
 ---
 
 <div id="waitlist" class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 max-w-md mx-auto">
@@ -28,18 +68,18 @@
                     type="email" 
                     id="email-input"
                     name="email"
-                    placeholder="Enter your email" 
+                    placeholder={texts.emailPlaceholder} 
                     required
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 transition-colors"
                 />
-                <p id="email-error" class="hidden text-red-500 text-sm mt-1">Please enter a valid email address</p>
+                <p id="email-error" class="hidden text-red-500 text-sm mt-1" data-default-text={texts.emailError} data-temp-text={texts.emailErrorTemp}>{texts.emailError}</p>
             </div>
             
             <input 
                 type="text"
                 id="firstName-input" 
                 name="firstName"
-                placeholder="First name (optional)" 
+                placeholder={texts.firstNamePlaceholder} 
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 transition-colors"
             />
             
@@ -48,7 +88,7 @@
                 id="submit-btn"
                 class="w-full bg-purple-600 text-white py-3 rounded-lg font-medium hover:bg-purple-700 transition-all transform hover:scale-[1.02] active:scale-[0.98]"
             >
-                <span id="btn-text">Join the waitlist</span>
+                <span id="btn-text">{texts.submitButton}</span>
                 <span id="btn-loader" class="hidden">
                     <svg class="animate-spin h-5 w-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -59,7 +99,7 @@
         </form>
         
         <p class="text-sm text-gray-500 mt-4">
-            Get early access and launch updates. No spam, unsubscribe anytime.
+            {texts.disclaimer}
         </p>
     </div>
 
@@ -74,12 +114,12 @@
             </div>
             
             <!-- Success Message -->
-            <h3 class="text-2xl font-bold text-gray-900 mb-2">You're on the list! 🎉</h3>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2" data-success-text={texts.successTitle} data-already-text={texts.alreadyOnList}>{texts.successTitle}</h3>
             <p class="text-gray-600 mb-1">
-                We've added <span id="user-email" class="font-medium text-purple-600"></span> to our waitlist.
+                {texts.successMessage} <span id="user-email" class="font-medium text-purple-600"></span> {texts.successMessage2}
             </p>
-            <p class="text-gray-600 mb-6">
-                You'll be the first to know when BurnX launches!
+            <p class="text-gray-600 mb-6" data-success-text={texts.successMessage3} data-already-text={texts.alreadyMessage}>
+                {texts.successMessage3}
             </p>
             
             <!-- Next Actions -->
@@ -89,7 +129,7 @@
                     id="add-another-btn"
                     class="text-sm text-purple-600 hover:text-purple-700 font-medium transition-colors"
                 >
-                    + Add another email
+                    {texts.addAnother}
                 </button>
             </div>
         </div>
@@ -263,7 +303,7 @@
         emailInput.addEventListener('input', function() {
             if (emailError && !emailError.classList.contains('hidden')) {
                 emailError.classList.add('hidden');
-                emailError.textContent = 'Please enter a valid email address'; // Reset to default message
+                emailError.textContent = emailError.getAttribute('data-default-text') || 'Please enter a valid email address'; // Reset to default message
                 emailInput.classList.remove('border-red-500');
                 emailInput.classList.add('border-gray-300');
             }
@@ -310,7 +350,7 @@
         // Check for suspicious email patterns
         if (isSuspiciousEmail(email)) {
             if (emailError) {
-                emailError.textContent = 'Please use a valid email address (no temporary emails)';
+                emailError.textContent = emailError.getAttribute('data-temp-text') || 'Please use a valid email address (no temporary emails)';
                 emailError.classList.remove('hidden');
             }
             if (emailInput) {
@@ -352,10 +392,10 @@
             const successDesc = document.querySelector('#success-container p:nth-of-type(2)');
             
             if (successTitle) {
-                successTitle.textContent = 'You\'re already on the list! 👋';
+                successTitle.textContent = successTitle.getAttribute('data-already-text') || 'You\'re already on the list! 👋';
             }
             if (successDesc) {
-                successDesc.textContent = 'We have your email and you\'ll be among the first to know when BurnX launches!';
+                successDesc.textContent = successDesc.getAttribute('data-already-text') || 'We have your email and you\'ll be among the first to know when BurnX launches!';
             }
             
             // Show user's email
@@ -401,10 +441,10 @@
                 const successDesc = document.querySelector('#success-container p:nth-of-type(2)');
                 
                 if (successTitle) {
-                    successTitle.textContent = 'You\'re on the list! 🎉';
+                    successTitle.textContent = successTitle.getAttribute('data-success-text') || 'You\'re on the list! 🎉';
                 }
                 if (successDesc) {
-                    successDesc.textContent = 'You\'ll be the first to know when BurnX launches!';
+                    successDesc.textContent = successDesc.getAttribute('data-success-text') || 'You\'ll be the first to know when BurnX launches!';
                 }
                 
                 // Show user's email in success message
