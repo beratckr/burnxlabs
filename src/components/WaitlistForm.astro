@@ -161,7 +161,9 @@
         ];
         
         const parts = email.split('@');
-        if (parts.length !== 2) return true; // Invalid email format
+        if (parts.length !== 2) {
+            return true; // Invalid email format
+        }
         
         const domain = parts[1].toLowerCase();
         for (let i = 0; i < disposableDomains.length; i++) {
