@@ -2,39 +2,41 @@
 ---
 
 <div id="waitlist" class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 max-w-md mx-auto">
+    <!-- Simple HTML form without JavaScript for Netlify Forms -->
     <form 
-        id="waitlist-form" 
         name="burnx-waitlist"
         method="POST"
-        netlify
-        netlify-honeypot="bot-field"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
         action="/success"
         class="space-y-4"
     >
         <!-- Required hidden field for Netlify Forms -->
         <input type="hidden" name="form-name" value="burnx-waitlist" />
-        <!-- Honeypot field for spam protection (hidden from users) -->
-        <div class="hidden">
+        
+        <!-- Honeypot field for spam protection -->
+        <p class="hidden">
             <label>
-                Don't fill this out if you're human: <input name="bot-field" />
+                Don't fill this out if you're human: 
+                <input name="bot-field" />
             </label>
-        </div>
+        </p>
         
         <input 
             type="email" 
-            id="email" 
             name="email"
             placeholder="Enter your email" 
             required
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
         />
+        
         <input 
             type="text" 
-            id="firstName" 
             name="firstName"
             placeholder="First name (optional)" 
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
         />
+        
         <button 
             type="submit" 
             class="w-full bg-gray-900 text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
@@ -46,60 +48,4 @@
     <p class="text-sm text-gray-500 mt-4">
         Get early access and launch updates. No spam, unsubscribe anytime.
     </p>
-    
-    <!-- Success/Error messages -->
-    <div id="form-success" class="hidden mt-4 p-4 bg-green-100 text-green-700 rounded-lg">
-        Thank you for joining our waitlist! We'll keep you updated on BurnX progress.
-    </div>
-    <div id="form-error" class="hidden mt-4 p-4 bg-red-100 text-red-700 rounded-lg">
-        Something went wrong. Please try again.
-    </div>
 </div>
-
-<script>
-    const form = document.getElementById('waitlist-form') as HTMLFormElement;
-    const successMsg = document.getElementById('form-success');
-    const errorMsg = document.getElementById('form-error');
-    
-    // Handle form submission with AJAX for better UX
-    form?.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        // Hide any previous messages
-        successMsg?.classList.add('hidden');
-        errorMsg?.classList.add('hidden');
-        
-        const formData = new FormData(form);
-        
-        try {
-            // Encode the form data properly for Netlify
-            const encodedData = new URLSearchParams();
-            formData.forEach((value, key) => {
-                encodedData.append(key, value.toString());
-            });
-            
-            const response = await fetch('/', {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: encodedData.toString()
-            });
-            
-            if (response.ok) {
-                successMsg?.classList.remove('hidden');
-                form.reset();
-                // Optional: redirect after 2 seconds
-                setTimeout(() => {
-                    window.location.href = '/success';
-                }, 2000);
-            } else {
-                console.error('Form submission failed:', response.status);
-                errorMsg?.classList.remove('hidden');
-            }
-        } catch (error) {
-            console.error('Form submission error:', error);
-            errorMsg?.classList.remove('hidden');
-        }
-    });
-</script>
