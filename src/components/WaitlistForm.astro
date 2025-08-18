@@ -316,17 +316,15 @@ const texts = formTranslations[lang] || formTranslations.en;
             e.preventDefault();
         
         // Get form data
-        const formData = new FormData(form);
-        // CRITICAL: Ensure form-name is included for Netlify
-        formData.set('form-name', 'burnx-waitlist');
-        const email = (formData.get('email') || '').toString().trim();
-        const firstName = (formData.get('firstName') || '').toString().trim();
+        const email = (document.getElementById('email-input').value || '').trim();
+        const firstName = (document.getElementById('firstName-input').value || '').trim();
         
-        // Log what we're sending
-        console.log('Submitting burnx-waitlist with:', {
+        // Create URL-encoded body exactly like a real form submission
+        const formBody = new URLSearchParams({
             'form-name': 'burnx-waitlist',
-            email: email,
-            firstName: firstName
+            'email': email,
+            'firstName': firstName,
+            'bot-field': ''
         });
         
         // Rate limiting temporarily disabled for testing
@@ -373,11 +371,11 @@ const texts = formTranslations[lang] || formTranslations.en;
         if (submitBtn) submitBtn.setAttribute('disabled', 'true');
         
         try {
-            // Submit to Netlify Forms
+            // Submit exactly like a real HTML form would
             const response = await fetch('/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(formData).toString()
+                body: formBody.toString()
             });
             
             if (response.ok) {
