@@ -322,6 +322,13 @@ const texts = formTranslations[lang] || formTranslations.en;
         const email = (formData.get('email') || '').toString().trim();
         const firstName = (formData.get('firstName') || '').toString().trim();
         
+        // Log what we're sending
+        console.log('Submitting burnx-waitlist with:', {
+            'form-name': 'burnx-waitlist',
+            email: email,
+            firstName: firstName
+        });
+        
         // Rate limiting temporarily disabled for testing
         // const rateCheck = checkRateLimit();
         // if (!rateCheck.allowed) {
