@@ -300,13 +300,25 @@ const t = useTranslations(lang);
         // CRITICAL: Ensure form-name is included for Netlify
         formData.set('form-name', 'burnx-contact');
         
+        // Debug: Log form data
+        console.log('Contact form submission data:');
+        for (let [key, value] of formData.entries()) {
+            console.log(`  ${key}: ${value}`);
+        }
+        
         try {
             // Submit to Netlify Forms
+            const bodyString = new URLSearchParams(formData).toString();
+            console.log('Sending to Netlify:', bodyString);
+            
             const response = await fetch('/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(formData).toString()
+                body: bodyString
             });
+            
+            console.log('Response status:', response.status);
+            console.log('Response ok:', response.ok);
             
             if (response.ok) {
                 // Show success message with animation
@@ -329,6 +341,11 @@ const t = useTranslations(lang);
                     setTimeout(() => {
                         successContainer.style.opacity = '1';
                     }, 50);
+                    
+                    // Reset button state after success
+                    btnText.classList.remove('hidden');
+                    btnLoader.classList.add('hidden');
+                    submitBtn.removeAttribute('disabled');
                 }, 300);
                 
                 // Reset form for next use
@@ -337,9 +354,9 @@ const t = useTranslations(lang);
                 throw new Error('Submission failed');
             }
         } catch (error) {
+            console.error('Contact form error:', error);
             alert(errorMsg);
-        } finally {
-            // Reset button state
+            // Reset button state on error
             btnText.classList.remove('hidden');
             btnLoader.classList.add('hidden');
             submitBtn.removeAttribute('disabled');
