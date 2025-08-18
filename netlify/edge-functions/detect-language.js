@@ -5,7 +5,7 @@ export default async (request, context) => {
     // Skip processing for static assets and special paths
     const staticExtensions = ['.css', '.js', '.mjs', '.jsx', '.ts', '.tsx', '.json', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.woff', '.woff2', '.ttf', '.otf', '.map'];
     const specialPaths = ['/_astro/', '/node_modules/', '/@vite/', '/@fs/', '/src/'];
-    const excludedPages = ['/test-form', '/success', '/about', '/blog', '/contact'];
+    const excludedPages = ['/success', '/about', '/blog', '/contact'];
     
     const hasStaticExtension = staticExtensions.some(ext => pathname.endsWith(ext));
     const isSpecialPath = specialPaths.some(path => pathname.includes(path));
