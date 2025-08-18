@@ -322,6 +322,12 @@ const texts = formTranslations[lang] || formTranslations.en;
         const email = (formData.get('email') || '').toString().trim();
         const firstName = (formData.get('firstName') || '').toString().trim();
         
+        // Debug: Log all form data being sent
+        console.log('Form data being sent:');
+        for (let [key, value] of formData.entries()) {
+            console.log(`  ${key}: ${value}`);
+        }
+        
         console.log('Form submitted - Email:', email, 'FirstName:', firstName);
         
         // Rate limiting temporarily disabled for testing
@@ -372,12 +378,19 @@ const texts = formTranslations[lang] || formTranslations.en;
         if (submitBtn) submitBtn.setAttribute('disabled', 'true');
         
         try {
-            // Submit to Netlify Forms - MUST submit to root path for Netlify to recognize
+            // Submit to Netlify Forms
+            // We need to submit to the actual form page, not a localized URL
+            const bodyString = new URLSearchParams(formData).toString();
+            console.log('Submitting to Netlify with body:', bodyString);
+            
             const response = await fetch('/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(formData).toString()
+                body: bodyString
             });
+            
+            console.log('Response status:', response.status);
+            console.log('Response URL:', response.url);
             
             if (response.ok) {
                 // Show success message
