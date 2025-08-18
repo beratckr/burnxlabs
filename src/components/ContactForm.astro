@@ -183,17 +183,23 @@ const t = useTranslations(lang);
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Get form data
-            const formData = new FormData(form);
-            // CRITICAL: Ensure form-name is included for Netlify
-            formData.set('form-name', 'burnx-contact');
+            // Get form values directly
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value.trim();
             
-            // Log what we're sending
-            console.log('Submitting burnx-contact form');
-            console.log('Form data entries:');
-            for (let [key, value] of formData.entries()) {
-                console.log(`  ${key}: ${value}`);
-            }
+            // Create URL-encoded body exactly like a real form submission
+            const formBody = new URLSearchParams({
+                'form-name': 'burnx-contact',
+                'firstName': firstName,
+                'lastName': lastName,
+                'email': email,
+                'subject': subject,
+                'message': message,
+                'bot-field': ''
+            });
             
             // Show loading state
             if (btnText) btnText.classList.add('hidden');
@@ -201,11 +207,11 @@ const t = useTranslations(lang);
             if (submitBtn) submitBtn.setAttribute('disabled', 'true');
             
             try {
-                // Submit to Netlify Forms - MUST be root path
+                // Submit exactly like a real HTML form would
                 const response = await fetch('/', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams(formData).toString()
+                    body: formBody.toString()
                 });
                 
                 if (response.ok) {

@@ -1,0 +1,41 @@
+---
+// This page exists solely for Netlify to detect forms during build
+// It will not be linked from anywhere
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Netlify Forms Detector</title>
+</head>
+<body style="display: none;">
+    <!-- These forms must match EXACTLY what we're submitting via JavaScript -->
+    
+    <!-- Waitlist Form - MUST match exactly what we submit -->
+    <form name="burnx-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="email" name="email" />
+        <input type="text" name="firstName" />
+        <input name="bot-field" />
+        <button type="submit">Submit</button>
+    </form>
+    
+    <!-- Contact Form - MUST match exactly what we submit -->
+    <form name="burnx-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="text" name="firstName" />
+        <input type="text" name="lastName" />
+        <input type="email" name="email" />
+        <select name="subject">
+            <option value="">Select</option>
+            <option value="general">General</option>
+            <option value="support">Support</option>
+            <option value="partnership">Partnership</option>
+            <option value="press">Press</option>
+            <option value="other">Other</option>
+        </select>
+        <textarea name="message"></textarea>
+        <input name="bot-field" />
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
