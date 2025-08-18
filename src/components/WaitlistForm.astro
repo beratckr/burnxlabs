@@ -164,8 +164,10 @@
         if (parts.length !== 2) return true; // Invalid email format
         
         const domain = parts[1].toLowerCase();
-        if (disposableDomains.some(function(d) { return domain.includes(d); })) {
-            return true;
+        for (let i = 0; i < disposableDomains.length; i++) {
+            if (domain.includes(disposableDomains[i])) {
+                return true;
+            }
         }
         
         // Block emails with too many numbers (often spam)
@@ -302,7 +304,13 @@
         
         // Check if email already exists in localStorage
         const submissions = JSON.parse(localStorage.getItem('waitlist_submissions') || '[]');
-        const existingSubmission = submissions.find(function(sub) { return sub.email.toLowerCase() === email.toLowerCase(); });
+        let existingSubmission = null;
+        for (let i = 0; i < submissions.length; i++) {
+            if (submissions[i].email && submissions[i].email.toLowerCase() === email.toLowerCase()) {
+                existingSubmission = submissions[i];
+                break;
+            }
+        }
         
         if (existingSubmission) {
             // Email already exists - show different message
