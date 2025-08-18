@@ -127,6 +127,9 @@
 </style>
 
 <script>
+(function() {
+    'use strict';
+    
     const form = document.getElementById('waitlist-form');
     const formContainer = document.getElementById('form-container');
     const successContainer = document.getElementById('success-container');
@@ -240,32 +243,37 @@
     }
     
     // Real-time email validation
-    emailInput?.addEventListener('blur', () => {
-        const email = emailInput.value.trim();
-        if (email && !validateEmail(email)) {
-            emailError?.classList.remove('hidden');
-            emailInput.classList.add('border-red-500');
-            emailInput.classList.remove('border-gray-300');
-        } else {
-            emailError?.classList.add('hidden');
-            emailInput.classList.remove('border-red-500');
-            emailInput.classList.add('border-gray-300');
-        }
-    });
+    if (emailInput) {
+        emailInput.addEventListener('blur', function() {
+            const email = emailInput.value.trim();
+            if (email && !validateEmail(email)) {
+                if (emailError) emailError.classList.remove('hidden');
+                emailInput.classList.add('border-red-500');
+                emailInput.classList.remove('border-gray-300');
+            } else {
+                if (emailError) emailError.classList.add('hidden');
+                emailInput.classList.remove('border-red-500');
+                emailInput.classList.add('border-gray-300');
+            }
+        });
+    }
     
     // Clear error on input
-    emailInput?.addEventListener('input', () => {
-        if (emailError && !emailError.classList.contains('hidden')) {
-            emailError.classList.add('hidden');
-            emailError.textContent = 'Please enter a valid email address'; // Reset to default message
-            emailInput.classList.remove('border-red-500');
-            emailInput.classList.add('border-gray-300');
-        }
-    });
+    if (emailInput) {
+        emailInput.addEventListener('input', function() {
+            if (emailError && !emailError.classList.contains('hidden')) {
+                emailError.classList.add('hidden');
+                emailError.textContent = 'Please enter a valid email address'; // Reset to default message
+                emailInput.classList.remove('border-red-500');
+                emailInput.classList.add('border-gray-300');
+            }
+        });
+    }
     
     // Handle form submission
-    form?.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
         
         // Get form data
         const formData = new FormData(form);
@@ -281,26 +289,32 @@
         
         // Validate email format
         if (!validateEmail(email)) {
-            emailError?.classList.remove('hidden');
-            emailInput?.classList.add('border-red-500');
-            emailInput?.classList.remove('border-gray-300');
-            emailInput?.focus();
-            
-            // Shake animation for the input
-            emailInput?.classList.add('animate-shake');
-            setTimeout(() => {
-                emailInput?.classList.remove('animate-shake');
-            }, 500);
+            if (emailError) emailError.classList.remove('hidden');
+            if (emailInput) {
+                emailInput.classList.add('border-red-500');
+                emailInput.classList.remove('border-gray-300');
+                emailInput.focus();
+                
+                // Shake animation for the input
+                emailInput.classList.add('animate-shake');
+                setTimeout(function() {
+                    emailInput.classList.remove('animate-shake');
+                }, 500);
+            }
             
             return; // Exit early if email is invalid
         }
         
         // Check for suspicious email patterns
         if (isSuspiciousEmail(email)) {
-            emailError?.textContent = 'Please use a valid email address (no temporary emails)';
-            emailError?.classList.remove('hidden');
-            emailInput?.classList.add('border-red-500');
-            emailInput?.focus();
+            if (emailError) {
+                emailError.textContent = 'Please use a valid email address (no temporary emails)';
+                emailError.classList.remove('hidden');
+            }
+            if (emailInput) {
+                emailInput.classList.add('border-red-500');
+                emailInput.focus();
+            }
             return;
         }
         
@@ -332,25 +346,27 @@
             }
             
             // Animate transition directly without API call
-            formContainer?.classList.add('opacity-0', 'scale-95');
+            if (formContainer) formContainer.classList.add('opacity-0', 'scale-95');
             
-            setTimeout(() => {
-                formContainer?.classList.add('hidden');
-                successContainer?.classList.remove('hidden');
-                
-                setTimeout(() => {
-                    successContainer?.classList.remove('opacity-0');
-                    successContainer?.classList.add('opacity-100', 'scale-100');
-                }, 50);
+            setTimeout(function() {
+                if (formContainer) formContainer.classList.add('hidden');
+                if (successContainer) {
+                    successContainer.classList.remove('hidden');
+                    
+                    setTimeout(function() {
+                        successContainer.classList.remove('opacity-0');
+                        successContainer.classList.add('opacity-100', 'scale-100');
+                    }, 50);
+                }
             }, 300);
             
             return; // Exit early, no need to submit again
         }
         
         // Show loading state for new submissions
-        btnText?.classList.add('hidden');
-        btnLoader?.classList.remove('hidden');
-        submitBtn?.setAttribute('disabled', 'true');
+        if (btnText) btnText.classList.add('hidden');
+        if (btnLoader) btnLoader.classList.remove('hidden');
+        if (submitBtn) submitBtn.setAttribute('disabled', 'true');
         
         try {
             // Submit to Netlify Forms
@@ -378,20 +394,22 @@
                 }
                 
                 // Animate transition
-                setTimeout(() => {
+                setTimeout(function() {
                     // Fade out form
-                    formContainer?.classList.add('opacity-0', 'scale-95');
+                    if (formContainer) formContainer.classList.add('opacity-0', 'scale-95');
                     
-                    setTimeout(() => {
+                    setTimeout(function() {
                         // Hide form and show success
-                        formContainer?.classList.add('hidden');
-                        successContainer?.classList.remove('hidden');
-                        
-                        // Fade in success
-                        setTimeout(() => {
-                            successContainer?.classList.remove('opacity-0');
-                            successContainer?.classList.add('opacity-100', 'scale-100');
-                        }, 50);
+                        if (formContainer) formContainer.classList.add('hidden');
+                        if (successContainer) {
+                            successContainer.classList.remove('hidden');
+                            
+                            // Fade in success
+                            setTimeout(function() {
+                                successContainer.classList.remove('opacity-0');
+                                successContainer.classList.add('opacity-100', 'scale-100');
+                            }, 50);
+                        }
                     }, 300);
                 }, 500);
                 
@@ -408,49 +426,57 @@
         } catch (error) {
             console.error('Form submission error:', error);
             // Reset button state
-            btnText?.classList.remove('hidden');
-            btnLoader?.classList.add('hidden');
-            submitBtn?.removeAttribute('disabled');
+            if (btnText) btnText.classList.remove('hidden');
+            if (btnLoader) btnLoader.classList.add('hidden');
+            if (submitBtn) submitBtn.removeAttribute('disabled');
             
             // Show error (you could make this more elegant)
             alert('Something went wrong. Please try again or contact support.');
         }
-    });
+        });
+    }
     
     // Handle "Add another email" button
-    addAnotherBtn?.addEventListener('click', () => {
+    if (addAnotherBtn) {
+        addAnotherBtn.addEventListener('click', function() {
         // Reset form
         form.reset();
         
         // Animate transition back to form
-        successContainer?.classList.remove('opacity-100', 'scale-100');
-        successContainer?.classList.add('opacity-0', 'scale-95');
+        if (successContainer) {
+            successContainer.classList.remove('opacity-100', 'scale-100');
+            successContainer.classList.add('opacity-0', 'scale-95');
+        }
         
-        setTimeout(() => {
-            successContainer?.classList.add('hidden');
-            formContainer?.classList.remove('hidden');
+        setTimeout(function() {
+            if (successContainer) successContainer.classList.add('hidden');
+            if (formContainer) formContainer.classList.remove('hidden');
             
             // Reset button state
-            btnText?.classList.remove('hidden');
-            btnLoader?.classList.add('hidden');
-            submitBtn?.removeAttribute('disabled');
+            if (btnText) btnText.classList.remove('hidden');
+            if (btnLoader) btnLoader.classList.add('hidden');
+            if (submitBtn) submitBtn.removeAttribute('disabled');
             
-            setTimeout(() => {
-                formContainer?.classList.remove('opacity-0', 'scale-95');
-                formContainer?.classList.add('opacity-100', 'scale-100');
+            setTimeout(function() {
+                if (formContainer) {
+                    formContainer.classList.remove('opacity-0', 'scale-95');
+                    formContainer.classList.add('opacity-100', 'scale-100');
+                }
                 
                 // Focus on email input
-                emailInput?.focus();
+                if (emailInput) emailInput.focus();
             }, 50);
         }, 300);
-    });
+        });
+    }
     
     // Check if user has already submitted
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', function() {
         const submissions = JSON.parse(localStorage.getItem('waitlist_submissions') || '[]');
         if (submissions.length > 0) {
             // Could show a different message for returning users
             console.log('User has already joined waitlist:', submissions);
         }
     });
+})();
 </script>
