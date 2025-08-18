@@ -322,12 +322,12 @@ const texts = formTranslations[lang] || formTranslations.en;
         
         console.log('Form submitted - Email:', email, 'FirstName:', firstName);
         
-        // Check rate limiting first
-        const rateCheck = checkRateLimit();
-        if (!rateCheck.allowed) {
-            alert(rateCheck.message);
-            return;
-        }
+        // Rate limiting temporarily disabled for testing
+        // const rateCheck = checkRateLimit();
+        // if (!rateCheck.allowed) {
+        //     alert(rateCheck.message);
+        //     return;
+        // }
         
         // Validate email format
         if (!validateEmail(email)) {
@@ -347,18 +347,18 @@ const texts = formTranslations[lang] || formTranslations.en;
             return; // Exit early if email is invalid
         }
         
-        // Check for suspicious email patterns
-        if (isSuspiciousEmail(email)) {
-            if (emailError) {
-                emailError.textContent = emailError.getAttribute('data-temp-text') || 'Please use a valid email address (no temporary emails)';
-                emailError.classList.remove('hidden');
-            }
-            if (emailInput) {
-                emailInput.classList.add('border-red-500');
-                emailInput.focus();
-            }
-            return;
-        }
+        // Suspicious email check temporarily disabled for testing
+        // if (isSuspiciousEmail(email)) {
+        //     if (emailError) {
+        //         emailError.textContent = emailError.getAttribute('data-temp-text') || 'Please use a valid email address (no temporary emails)';
+        //         emailError.classList.remove('hidden');
+        //     }
+        //     if (emailInput) {
+        //         emailInput.classList.add('border-red-500');
+        //         emailInput.focus();
+        //     }
+        //     return;
+        // }
         
         // No duplicate checking - let Netlify handle it server-side
         console.log('Submitting to Netlify...');
@@ -416,8 +416,8 @@ const texts = formTranslations[lang] || formTranslations.en;
                 
                 // Don't store emails in localStorage - let server handle duplicate detection
                 
-                // Update rate limiting
-                updateRateLimit();
+                // Rate limiting disabled for testing
+                // updateRateLimit();
                 
             } else {
                 throw new Error('Submission failed');
