@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Static Waitlist - No JS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background: #8B5CF6;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .info {
+            background: #f0f0f0;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <h2>Static Form Test</h2>
+        <p>This form has:</p>
+        <ul>
+            <li>NO JavaScript at all</li>
+            <li>NO edge function processing</li>
+            <li>Direct HTML form submission</li>
+            <li>Will redirect to /success after submission</li>
+        </ul>
+    </div>
+
+    <form 
+        name="static-burnx-waitlist" 
+        method="POST" 
+        data-netlify="true"
+        action="/success"
+    >
+        <input type="hidden" name="form-name" value="static-burnx-waitlist">
+        
+        <label for="email">Email:</label>
+        <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            required 
+            placeholder="your@email.com"
+        >
+        
+        <label for="firstName">First Name (optional):</label>
+        <input 
+            type="text" 
+            id="firstName" 
+            name="firstName" 
+            placeholder="John"
+        >
+        
+        <button type="submit">
+            Join Waitlist (Static Form)
+        </button>
+    </form>
+    
+    <p style="margin-top: 30px; color: #666;">
+        After submitting, check Netlify Forms dashboard for "static-burnx-waitlist" form.
+    </p>
+</body>
+</html>
