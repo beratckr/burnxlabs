@@ -2,7 +2,23 @@
 ---
 
 <div id="waitlist" class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 max-w-md mx-auto">
-    <form id="waitlist-form" class="space-y-4">
+    <form 
+        id="waitlist-form" 
+        name="burnx-waitlist"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        action="/success"
+        class="space-y-4"
+    >
+        <!-- Honeypot field for spam protection (hidden from users) -->
+        <input type="hidden" name="form-name" value="burnx-waitlist" />
+        <p class="hidden">
+            <label>
+                Don't fill this out if you're human: <input name="bot-field" />
+            </label>
+        </p>
+        
         <input 
             type="email" 
             id="email" 
@@ -29,30 +45,47 @@
     <p class="text-sm text-gray-500 mt-4">
         Get early access and launch updates. No spam, unsubscribe anytime.
     </p>
+    
+    <!-- Success/Error messages -->
+    <div id="form-success" class="hidden mt-4 p-4 bg-green-100 text-green-700 rounded-lg">
+        Thank you for joining our waitlist! We'll keep you updated on BurnX progress.
+    </div>
+    <div id="form-error" class="hidden mt-4 p-4 bg-red-100 text-red-700 rounded-lg">
+        Something went wrong. Please try again.
+    </div>
 </div>
 
 <script>
     const form = document.getElementById('waitlist-form') as HTMLFormElement;
+    const successMsg = document.getElementById('form-success');
+    const errorMsg = document.getElementById('form-error');
     
+    // Handle form submission with AJAX for better UX
     form?.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const formData = new FormData(form);
-        const email = formData.get('email');
-        const firstName = formData.get('firstName');
+        // Hide any previous messages
+        successMsg?.classList.add('hidden');
+        errorMsg?.classList.add('hidden');
         
-        if (!email) {
-            alert('Please enter your email address.');
-            return;
-        }
+        const formData = new FormData(form);
         
         try {
-            // For now, we'll just show a success message
-            // In production, this would integrate with ConvertKit or another email service
-            alert('Thank you for joining our waitlist! We\'ll keep you updated on BurnX progress.');
-            form.reset();
+            const response = await fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData as any).toString()
+            });
+            
+            if (response.ok) {
+                successMsg?.classList.remove('hidden');
+                form.reset();
+            } else {
+                errorMsg?.classList.remove('hidden');
+            }
         } catch (error) {
-            alert('Something went wrong. Please try again.');
+            console.error('Form submission error:', error);
+            errorMsg?.classList.remove('hidden');
         }
     });
 </script>
