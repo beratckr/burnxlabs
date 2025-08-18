@@ -267,6 +267,8 @@ const t = useTranslations(lang);
         submitBtn.setAttribute('disabled', 'true');
         
         const formData = new FormData(form);
+        // CRITICAL: Ensure form-name is included for Netlify
+        formData.set('form-name', 'burnx-contact');
         
         try {
             // Submit to Netlify Forms - MUST submit to root path for Netlify to recognize
