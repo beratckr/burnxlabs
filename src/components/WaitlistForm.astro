@@ -320,6 +320,9 @@
         
         // Check if email already exists in localStorage
         const submissions = JSON.parse(localStorage.getItem('waitlist_submissions') || '[]');
+        console.log('Existing submissions:', submissions);
+        console.log('Checking for email:', email);
+        
         let existingSubmission = null;
         for (let i = 0; i < submissions.length; i++) {
             if (submissions[i].email && submissions[i].email.toLowerCase() === email.toLowerCase()) {
@@ -329,6 +332,7 @@
         }
         
         if (existingSubmission) {
+            console.log('Duplicate found! Blocking submission to Netlify.');
             // Email already exists - show different message
             const successTitle = document.querySelector('#success-container h3');
             const successDesc = document.querySelector('#success-container p:nth-of-type(2)');
@@ -364,6 +368,7 @@
         }
         
         // Show loading state for new submissions
+        console.log('New submission, sending to Netlify...');
         if (btnText) btnText.classList.add('hidden');
         if (btnLoader) btnLoader.classList.remove('hidden');
         if (submitBtn) submitBtn.setAttribute('disabled', 'true');
@@ -414,8 +419,10 @@
                 }, 500);
                 
                 // Store submission in localStorage to prevent duplicates
-                submissions.push({ email, firstName, timestamp: new Date().toISOString() });
-                localStorage.setItem('waitlist_submissions', JSON.stringify(submissions));
+                // Re-fetch submissions to ensure we have the latest data
+                const updatedSubmissions = JSON.parse(localStorage.getItem('waitlist_submissions') || '[]');
+                updatedSubmissions.push({ email: email, firstName: firstName, timestamp: new Date().toISOString() });
+                localStorage.setItem('waitlist_submissions', JSON.stringify(updatedSubmissions));
                 
                 // Update rate limiting
                 updateRateLimit();
