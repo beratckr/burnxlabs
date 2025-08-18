@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Contact - NO JavaScript</title>
+</head>
+<body>
+    <h1>Test Contact Form - Pure HTML</h1>
+    
+    <form name="burnx-contact" method="POST" data-netlify="true">
+        <p>
+            <label>First Name: <input type="text" name="firstName" required /></label>
+        </p>
+        <p>
+            <label>Last Name: <input type="text" name="lastName" required /></label>
+        </p>
+        <p>
+            <label>Email: <input type="email" name="email" required /></label>
+        </p>
+        <p>
+            <label>Subject: 
+                <select name="subject" required>
+                    <option value="">Select</option>
+                    <option value="general">General</option>
+                    <option value="support">Support</option>
+                    <option value="partnership">Partnership</option>
+                    <option value="press">Press</option>
+                    <option value="other">Other</option>
+                </select>
+            </label>
+        </p>
+        <p>
+            <label>Message: <textarea name="message" required></textarea></label>
+        </p>
+        <p>
+            <button type="submit">Send Message</button>
+        </p>
+    </form>
+</body>
+</html>
