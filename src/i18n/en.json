@@ -1,0 +1,75 @@
+{
+    "meta": {
+        "title": "BurnXLabs - AI-Powered Fitness & Wellness",
+        "description": "Transform your fitness journey with BurnX, the AI-powered super app for personalized workouts, nutrition, and wellness."
+    },
+    "nav": {
+        "home": "Home",
+        "about": "About",
+        "blog": "Blog",
+        "contact": "Contact"
+    },
+    "hero": {
+        "title": "Transform Your Fitness Journey with AI",
+        "subtitle": "BurnX is the all-in-one fitness super app that adapts to you",
+        "cta": "Join the Waitlist",
+        "placeholder": "Enter your email"
+    },
+    "features": {
+        "title": "Why Choose BurnX?",
+        "ai_workouts": {
+            "title": "AI-Powered Workouts",
+            "description": "Personalized training plans that adapt to your progress and goals"
+        },
+        "nutrition": {
+            "title": "Smart Nutrition Tracking",
+            "description": "AI-assisted meal planning and macro tracking made simple"
+        },
+        "community": {
+            "title": "Supportive Community",
+            "description": "Connect with like-minded individuals on similar fitness journeys"
+        },
+        "wellness": {
+            "title": "Holistic Wellness",
+            "description": "Track sleep, stress, and recovery for complete health optimization"
+        }
+    },
+    "waitlist": {
+        "title": "Be the First to Experience BurnX",
+        "subtitle": "Join our exclusive waitlist and get early access when we launch",
+        "button": "Join Waitlist",
+        "success": "Thank you! You're on the list.",
+        "error": "Something went wrong. Please try again."
+    },
+    "footer": {
+        "copyright": "© 2024 BurnXLabs. All rights reserved.",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service"
+    },
+    "about": {
+        "title": "About BurnXLabs",
+        "mission": {
+            "title": "Our Mission",
+            "content": "To democratize fitness and wellness through innovative AI technology, making personalized health optimization accessible to everyone."
+        },
+        "team": {
+            "title": "Our Team",
+            "description": "A passionate group of fitness enthusiasts, AI engineers, and health experts working to revolutionize wellness."
+        }
+    },
+    "blog": {
+        "title": "BurnX Blog",
+        "subtitle": "Insights on fitness, nutrition, and wellness",
+        "readMore": "Read More"
+    },
+    "contact": {
+        "title": "Get in Touch",
+        "subtitle": "We'd love to hear from you",
+        "form": {
+            "name": "Name",
+            "email": "Email",
+            "message": "Message",
+            "send": "Send Message"
+        }
+    }
+}

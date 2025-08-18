@@ -1,0 +1,158 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import WaitlistForm from '../../components/WaitlistForm.astro';
+import { useTranslations, getLangFromUrl } from '../../i18n/utils';
+import { languages } from '../../i18n/config';
+
+export function getStaticPaths() {
+    return Object.keys(languages).map((lang) => ({
+        params: { lang }
+    }));
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title={t('meta.title')}>
+    <!-- Hero Section -->
+    <section class="pt-16 pb-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center max-w-4xl mx-auto">
+                <!-- Badge -->
+                <div class="inline-flex items-center bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium mb-6">
+                    <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                    {lang === 'tr' ? 'Ekim 2025\'te Geliyor' : 'Coming October 2025'}
+                </div>
+
+                <!-- Headline -->
+                <h1 class="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+                    {t('hero.title')}
+                </h1>
+
+                <!-- Description -->
+                <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+                    {t('hero.subtitle')}
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#waitlist" class="bg-gray-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors">
+                        {t('hero.cta')}
+                    </a>
+                    <a href="#product" class="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-medium hover:border-gray-400 transition-colors">
+                        {lang === 'tr' ? 'Daha Fazla Bilgi' : 'Learn more'}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="product" class="py-20 px-6 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    {t('features.title')}
+                </h2>
+            </div>
+
+            <!-- Feature Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+                <!-- AI Workouts -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">{t('features.ai_workouts.title')}</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        {t('features.ai_workouts.description')}
+                    </p>
+                </div>
+
+                <!-- Nutrition -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16l-3-9m3 9l3-9"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">{t('features.nutrition.title')}</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        {t('features.nutrition.description')}
+                    </p>
+                </div>
+
+                <!-- Community -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">{t('features.community.title')}</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        {t('features.community.description')}
+                    </p>
+                </div>
+
+                <!-- Wellness -->
+                <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">{t('features.wellness.title')}</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        {t('features.wellness.description')}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Waitlist Section -->
+    <section id="waitlist" class="py-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                {t('waitlist.title')}
+            </h2>
+            <p class="text-lg text-gray-600 mb-12">
+                {t('waitlist.subtitle')}
+            </p>
+
+            <!-- Waitlist Form -->
+            <WaitlistForm />
+        </div>
+    </section>
+</Layout>
+
+<script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const target = document.querySelector(targetId);
+            if (target) {
+                if (targetId === '#waitlist') {
+                    const rect = target.getBoundingClientRect();
+                    const absoluteTop = window.pageYOffset + rect.top;
+                    window.scrollTo({
+                        top: absoluteTop - 100,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+</script>

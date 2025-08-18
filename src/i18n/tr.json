@@ -1,0 +1,75 @@
+{
+    "meta": {
+        "title": "BurnXLabs - Yapay Zeka Destekli Fitness ve Sağlıklı Yaşam",
+        "description": "BurnX ile fitness yolculuğunuzu dönüştürün. Kişiselleştirilmiş egzersizler, beslenme ve sağlıklı yaşam için yapay zeka destekli süper uygulama."
+    },
+    "nav": {
+        "home": "Ana Sayfa",
+        "about": "Hakkımızda",
+        "blog": "Blog",
+        "contact": "İletişim"
+    },
+    "hero": {
+        "title": "Yapay Zeka ile Fitness Yolculuğunuzu Dönüştürün",
+        "subtitle": "BurnX, size uyum sağlayan hepsi bir arada fitness süper uygulaması",
+        "cta": "Bekleme Listesine Katıl",
+        "placeholder": "E-posta adresinizi girin"
+    },
+    "features": {
+        "title": "Neden BurnX?",
+        "ai_workouts": {
+            "title": "Yapay Zeka Destekli Egzersizler",
+            "description": "İlerlemenize ve hedeflerinize uyum sağlayan kişiselleştirilmiş antrenman planları"
+        },
+        "nutrition": {
+            "title": "Akıllı Beslenme Takibi",
+            "description": "Yapay zeka destekli öğün planlama ve makro takibini kolaylaştırın"
+        },
+        "community": {
+            "title": "Destekleyici Topluluk",
+            "description": "Benzer fitness yolculuğundaki kişilerle bağlantı kurun"
+        },
+        "wellness": {
+            "title": "Bütünsel Sağlık",
+            "description": "Tam sağlık optimizasyonu için uyku, stres ve toparlanmayı takip edin"
+        }
+    },
+    "waitlist": {
+        "title": "BurnX'i İlk Deneyenlerden Olun",
+        "subtitle": "Özel bekleme listemize katılın ve lansmanda erken erişim kazanın",
+        "button": "Bekleme Listesine Katıl",
+        "success": "Teşekkürler! Listedesiniz.",
+        "error": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin."
+    },
+    "footer": {
+        "copyright": "© 2024 BurnXLabs. Tüm hakları saklıdır.",
+        "privacy": "Gizlilik Politikası",
+        "terms": "Kullanım Koşulları"
+    },
+    "about": {
+        "title": "BurnXLabs Hakkında",
+        "mission": {
+            "title": "Misyonumuz",
+            "content": "Yenilikçi yapay zeka teknolojisi ile fitness ve sağlıklı yaşamı demokratikleştirmek, kişiselleştirilmiş sağlık optimizasyonunu herkes için erişilebilir kılmak."
+        },
+        "team": {
+            "title": "Ekibimiz",
+            "description": "Sağlıklı yaşamı devrimleştirmek için çalışan tutkulu fitness meraklıları, yapay zeka mühendisleri ve sağlık uzmanları."
+        }
+    },
+    "blog": {
+        "title": "BurnX Blog",
+        "subtitle": "Fitness, beslenme ve sağlıklı yaşam hakkında içgörüler",
+        "readMore": "Devamını Oku"
+    },
+    "contact": {
+        "title": "İletişime Geçin",
+        "subtitle": "Sizden haber almak isteriz",
+        "form": {
+            "name": "İsim",
+            "email": "E-posta",
+            "message": "Mesaj",
+            "send": "Mesaj Gönder"
+        }
+    }
+}

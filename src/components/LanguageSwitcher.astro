@@ -1,0 +1,54 @@
+---
+import { languages, type Language } from '../i18n/config';
+
+const currentPath = Astro.url.pathname;
+const segments = currentPath.split('/').filter(Boolean);
+const currentLang = segments[0] as Language || 'en';
+const pathWithoutLang = '/' + segments.slice(1).join('/');
+---
+
+<div class="language-switcher">
+    <select 
+        id="language-select"
+        class="bg-gray-800 text-white px-3 py-1 rounded-md border border-gray-600 focus:outline-none focus:border-purple-500"
+        data-current-path={pathWithoutLang}
+    >
+        {Object.entries(languages).map(([code, name]) => (
+            <option value={code} selected={code === currentLang}>
+                {name}
+            </option>
+        ))}
+    </select>
+</div>
+
+<script>
+    const select = document.getElementById('language-select') as HTMLSelectElement;
+    const currentPath = select?.dataset.currentPath || '/';
+    
+    select?.addEventListener('change', (e) => {
+        const target = e.target as HTMLSelectElement;
+        const newLang = target.value;
+        
+        document.cookie = `lang=${newLang}; path=/; max-age=${60 * 60 * 24 * 365}; SameSite=Lax`;
+        localStorage.setItem('preferredLanguage', newLang);
+        
+        const newUrl = `/${newLang}${currentPath}`;
+        window.location.href = newUrl;
+    });
+</script>
+
+<style>
+    .language-switcher {
+        position: relative;
+        display: inline-block;
+    }
+    
+    select {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 0.5rem center;
+        background-size: 1em;
+        padding-right: 2rem;
+    }
+</style>
