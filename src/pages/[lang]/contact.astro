@@ -320,10 +320,23 @@ const t = useTranslations(lang);
             console.log('Response status:', response.status);
             console.log('Response ok:', response.ok);
             
-            if (response.ok) {
+            // Netlify Forms returns 302 redirect on success
+            if (response.ok || response.status === 302) {
+                console.log('Form submitted successfully!');
+                
                 // Show success message with animation
                 const formContainer = document.querySelector('.bg-white.rounded-xl.shadow-lg');
                 const successContainer = document.getElementById('success-container');
+                
+                if (!formContainer || !successContainer) {
+                    console.error('Could not find form or success container');
+                    alert('Message sent successfully!');
+                    form.reset();
+                    btnText.classList.remove('hidden');
+                    btnLoader.classList.add('hidden');
+                    submitBtn.removeAttribute('disabled');
+                    return;
+                }
                 
                 // Fade out form
                 formContainer.style.transition = 'opacity 0.3s ease-out';
@@ -354,7 +367,8 @@ const t = useTranslations(lang);
                 throw new Error('Submission failed');
             }
         } catch (error) {
-            console.error('Contact form error:', error);
+            console.error('Contact form submission error:', error);
+            console.error('Error details:', error.message, error.stack);
             alert(errorMsg);
             // Reset button state on error
             btnText.classList.remove('hidden');
