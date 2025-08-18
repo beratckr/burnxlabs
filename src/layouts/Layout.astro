@@ -39,9 +39,6 @@ const pathWithoutLang = '/' + segments.slice(1).join('/') || '';
         <link rel="alternate" hreflang="x-default" href={`${Astro.site || ''}/en${pathWithoutLang}`} />
     </head>
     <body class="antialiased text-gray-900 bg-white font-inter">
-        <div class="fixed top-4 right-4 z-50">
-            <LanguageSwitcher />
-        </div>
         <Header />
         <main class="pt-16">
             <slot />

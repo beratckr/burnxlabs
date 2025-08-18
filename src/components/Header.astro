@@ -1,17 +1,24 @@
 ---
+import { getLangFromUrl } from '../i18n/utils';
+import { useTranslations } from '../i18n/utils';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const navItems = [
-    { linkText: 'Product', href: '/#product' },
-    { linkText: 'About', href: '/about' },
-    { linkText: 'Blog', href: '/blog' },
-    { linkText: 'Contact', href: '/contact' }
+    { linkText: t('nav.home'), href: `/${lang}/` },
+    { linkText: t('nav.about'), href: `/${lang}/about` },
+    { linkText: t('nav.blog'), href: `/${lang}/blog` },
+    { linkText: t('nav.contact'), href: `/${lang}/contact` }
 ];
 ---
 
-<nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-gray-200 z-50">
+<nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-gray-200 z-40">
     <div class="max-w-6xl mx-auto px-6">
         <div class="flex items-center justify-between h-16">
             <!-- Logo -->
-            <a href="/" class="flex items-center space-x-3">
+            <a href={`/${lang}/`} class="flex items-center space-x-3">
                 <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-pink-500 rounded-lg flex items-center justify-center">
                     <span class="text-white font-bold text-sm">B</span>
                 </div>
@@ -25,9 +32,12 @@ const navItems = [
                         {item.linkText}
                     </a>
                 ))}
-                <a href="/#waitlist" class="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors">
-                    Join Waitlist
-                </a>
+                <div class="flex items-center space-x-6">
+                    <LanguageSwitcher />
+                    <a href={`/${lang}/#waitlist`} class="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors">
+                        {t('hero.cta')}
+                    </a>
+                </div>
             </div>
 
             <!-- Mobile Menu Button -->
@@ -47,8 +57,11 @@ const navItems = [
                     {item.linkText}
                 </a>
             ))}
-            <a href="/#waitlist" class="block w-full bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium text-center mt-4">
-                Join Waitlist
+            <div class="pt-3 pb-3 border-t border-gray-100">
+                <LanguageSwitcher />
+            </div>
+            <a href={`/${lang}/#waitlist`} class="block w-full bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium text-center">
+                {t('hero.cta')}
             </a>
         </div>
     </div>
