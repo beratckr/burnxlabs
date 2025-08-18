@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html>
 <body>
-  <!-- This hidden form is for Netlify to detect during build -->
+  <!-- These hidden forms are for Netlify to detect during build -->
+  <!-- Waitlist Form -->
   <form name="burnx-waitlist" data-netlify="true" netlify-honeypot="bot-field" hidden>
     <input type="email" name="email" />
     <input type="text" name="firstName" />
+    <input name="bot-field" />
+  </form>
+  
+  <!-- Contact Form -->
+  <form name="burnx-contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="text" name="firstName" />
+    <input type="text" name="lastName" />
+    <input type="email" name="email" />
+    <input type="text" name="subject" />
+    <textarea name="message"></textarea>
     <input name="bot-field" />
   </form>
 </body>
