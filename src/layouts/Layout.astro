@@ -30,5 +30,27 @@ const { title, description = "BurnX - AI-powered fitness and nutrition coaching 
             <slot />
         </main>
         <Footer />
+        
+        <script>
+            // Handle scroll to waitlist when coming from other pages
+            document.addEventListener('DOMContentLoaded', () => {
+                // Check if URL has #waitlist hash
+                if (window.location.hash === '#waitlist') {
+                    setTimeout(() => {
+                        const waitlist = document.querySelector('#waitlist');
+                        if (waitlist) {
+                            const rect = waitlist.getBoundingClientRect();
+                            const absoluteTop = window.pageYOffset + rect.top;
+                            
+                            // Scroll with offset for better visibility on mobile
+                            window.scrollTo({
+                                top: absoluteTop - 100,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }, 100); // Small delay to ensure page is fully loaded
+                }
+            });
+        </script>
     </body>
 </html>
