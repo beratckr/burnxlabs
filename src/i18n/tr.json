@@ -48,13 +48,43 @@
     },
     "about": {
         "title": "BurnXLabs Hakkında",
+        "pageTitle": "Hakkımızda - BurnXLabs",
+        "hero": {
+            "title": "Başlangıç fitness'ının geleceğini inşa ediyoruz",
+            "subtitle": "Fitness'ı herkes için erişilebilir kılma misyonundayız, en çok ihtiyacı olanlardan başlayarak - tam yeni başlayanlar."
+        },
         "mission": {
             "title": "Misyonumuz",
-            "content": "Yenilikçi yapay zeka teknolojisi ile fitness ve sağlıklı yaşamı demokratikleştirmek, kişiselleştirilmiş sağlık optimizasyonunu herkes için erişilebilir kılmak."
+            "content1": "BurnXLabs'ta, deneyim seviyesi veya geçmişi ne olursa olsun herkesin kişiselleştirilmiş fitness rehberliğine erişimi hak ettiğine inanıyoruz.",
+            "content2": "Geleneksel fitness uygulamaları ne yaptığınızı zaten bildiğinizi varsayar. Size karmaşık antrenmanlar sunar, kafa karıştırıcı terimler kullanır ve ayak uydurmanızı bekler. Biz farklıyız.",
+            "content3": "BurnX, fitness yolculuğuna yeni başlayanlar için sıfırdan tasarlandı. Yapay zeka koçumuz \"superset\"in ne olduğunu veya şınavın nasıl düzgün yapıldığını bilmeyebileceğinizi anlıyor. Ve bu tamamen normal.",
+            "stat": "500K+",
+            "statText": "İnsan fitness yolculuğuna başlamak istiyor ama nereden başlayacağını bilmiyor"
+        },
+        "values": {
+            "title": "Değerlerimiz",
+            "inclusivity": {
+                "title": "Kapsayıcılık",
+                "description": "Fitness herkes içindir. Yaş, yetenek veya geçmiş önemli değil - hepimiz bir yerden başlarız."
+            },
+            "simplicity": {
+                "title": "Basitlik",
+                "description": "Fitness'ı karmaşık hale getirmiyoruz. Net rehberlik, basit adımlar ve anlaşılır ilerleme."
+            },
+            "empathy": {
+                "title": "Empati",
+                "description": "Başlamanın ne kadar zor olduğunu anlıyoruz. Yapay zekamız eleştirmez, yargılamaz - sadece destekler."
+            }
         },
         "team": {
             "title": "Ekibimiz",
-            "description": "Sağlıklı yaşamı devrimleştirmek için çalışan tutkulu fitness meraklıları, yapay zeka mühendisleri ve sağlık uzmanları."
+            "subtitle": "Fitness meraklıları, yapay zeka mühendisleri ve sağlık uzmanlarından oluşan tutkulu bir ekibiz.",
+            "location": "Ekibimiz San Francisco ve İstanbul'da konumlanmış olup, herkes için fitness'ı erişilebilir kılmak için çalışıyor.",
+            "cta": "Bizimle iletişime geçin"
+        },
+        "cta": {
+            "title": "Yolculuğunuza bizimle başlayın",
+            "subtitle": "İlk kullanıcılarımız arasında yer alın ve özel erişim kazanın."
         }
     },
     "blog": {

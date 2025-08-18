@@ -1,0 +1,151 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations, getLangFromUrl } from '../../i18n/utils';
+import { languages } from '../../i18n/config';
+
+export function getStaticPaths() {
+    return Object.keys(languages).map((lang) => ({
+        params: { lang }
+    }));
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title={t('about.pageTitle')}>
+    <!-- Hero Section -->
+    <section class="pt-16 pb-20 px-6 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                {t('about.hero.title')}
+            </h1>
+            <p class="text-xl text-gray-600 leading-relaxed">
+                {t('about.hero.subtitle')}
+            </p>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">
+                        {t('about.mission.title')}
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        {t('about.mission.content1')}
+                    </p>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        {t('about.mission.content2')}
+                    </p>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        {t('about.mission.content3')}
+                    </p>
+                </div>
+                <div class="bg-gradient-to-br from-blue-50 to-pink-50 rounded-2xl p-12 text-center">
+                    <div class="text-6xl font-bold bg-gradient-to-r from-blue-600 to-pink-500 bg-clip-text text-transparent mb-4">
+                        {t('about.mission.stat')}
+                    </div>
+                    <p class="text-xl text-gray-700">
+                        {t('about.mission.statText')}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-20 px-6 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-16">
+                {t('about.values.title')}
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-8">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                        {t('about.values.inclusivity.title')}
+                    </h3>
+                    <p class="text-gray-600">
+                        {t('about.values.inclusivity.description')}
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-8">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                        {t('about.values.simplicity.title')}
+                    </h3>
+                    <p class="text-gray-600">
+                        {t('about.values.simplicity.description')}
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-8">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                        {t('about.values.empathy.title')}
+                    </h3>
+                    <p class="text-gray-600">
+                        {t('about.values.empathy.description')}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">
+                    {t('about.team.title')}
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    {t('about.team.subtitle')}
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <p class="text-gray-600 mb-8">
+                    {t('about.team.location')}
+                </p>
+                <a href={`/${lang}/contact`} class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium">
+                    {t('about.team.cta')}
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6 bg-gradient-to-r from-blue-600 to-pink-500">
+        <div class="max-w-4xl mx-auto text-center text-white">
+            <h2 class="text-3xl font-bold mb-4">
+                {t('about.cta.title')}
+            </h2>
+            <p class="text-xl mb-8 opacity-90">
+                {t('about.cta.subtitle')}
+            </p>
+            <a href={`/${lang}/#waitlist`} class="inline-block bg-white text-gray-900 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                {t('hero.cta')}
+            </a>
+        </div>
+    </section>
+</Layout>
