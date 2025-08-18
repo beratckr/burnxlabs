@@ -270,13 +270,24 @@ const t = useTranslations(lang);
         // CRITICAL: Ensure form-name is included for Netlify
         formData.set('form-name', 'burnx-contact');
         
+        // Debug logging
+        console.log('Contact form data:');
+        for (let [key, value] of formData.entries()) {
+            console.log(`  ${key}: ${value}`);
+        }
+        
         try {
             // Submit to Netlify Forms - MUST submit to root path for Netlify to recognize
+            const bodyString = new URLSearchParams(formData).toString();
+            console.log('Submitting contact form with:', bodyString);
+            
             const response = await fetch('/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(formData).toString()
+                body: bodyString
             });
+            
+            console.log('Contact form response:', response.status, response.url);
             
             if (response.ok) {
                 alert(successMsg);

@@ -322,14 +322,6 @@ const texts = formTranslations[lang] || formTranslations.en;
         const email = (formData.get('email') || '').toString().trim();
         const firstName = (formData.get('firstName') || '').toString().trim();
         
-        // Debug: Log all form data being sent
-        console.log('Form data being sent:');
-        for (let [key, value] of formData.entries()) {
-            console.log(`  ${key}: ${value}`);
-        }
-        
-        console.log('Form submitted - Email:', email, 'FirstName:', firstName);
-        
         // Rate limiting temporarily disabled for testing
         // const rateCheck = checkRateLimit();
         // if (!rateCheck.allowed) {
@@ -368,29 +360,18 @@ const texts = formTranslations[lang] || formTranslations.en;
         //     return;
         // }
         
-        // No duplicate checking - let Netlify handle it server-side
-        console.log('Submitting to Netlify...');
-        
-        // Show loading state for new submissions
-        console.log('New submission, sending to Netlify...');
+        // Show loading state
         if (btnText) btnText.classList.add('hidden');
         if (btnLoader) btnLoader.classList.remove('hidden');
         if (submitBtn) submitBtn.setAttribute('disabled', 'true');
         
         try {
             // Submit to Netlify Forms
-            // We need to submit to the actual form page, not a localized URL
-            const bodyString = new URLSearchParams(formData).toString();
-            console.log('Submitting to Netlify with body:', bodyString);
-            
             const response = await fetch('/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: bodyString
+                body: new URLSearchParams(formData).toString()
             });
-            
-            console.log('Response status:', response.status);
-            console.log('Response URL:', response.url);
             
             if (response.ok) {
                 // Show success message
