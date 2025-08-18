@@ -4,6 +4,9 @@ import '@fontsource-variable/inter/wght.css';
 import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import { getLangFromUrl } from '../i18n/utils';
+import { languages } from '../i18n/config';
 
 interface Props {
     title: string;
@@ -11,10 +14,15 @@ interface Props {
 }
 
 const { title, description = "BurnX - AI-powered fitness and nutrition coaching designed for beginners. Launch October 2025." } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+const segments = currentPath.split('/').filter(Boolean);
+const pathWithoutLang = '/' + segments.slice(1).join('/') || '';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
     <head>
         <meta charset="UTF-8" />
         <title>{title}</title>
@@ -23,8 +31,17 @@ const { title, description = "BurnX - AI-powered fitness and nutrition coaching 
         <meta name="generator" content={Astro.generator} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="preload" as="font" type="font/woff2" href={interWoff2} crossorigin />
+        
+        <!-- hreflang tags for SEO -->
+        {Object.keys(languages).map((l) => (
+            <link rel="alternate" hreflang={l} href={`${Astro.site || ''}/${l}${pathWithoutLang}`} />
+        ))}
+        <link rel="alternate" hreflang="x-default" href={`${Astro.site || ''}/en${pathWithoutLang}`} />
     </head>
     <body class="antialiased text-gray-900 bg-white font-inter">
+        <div class="fixed top-4 right-4 z-50">
+            <LanguageSwitcher />
+        </div>
         <Header />
         <main class="pt-16">
             <slot />
