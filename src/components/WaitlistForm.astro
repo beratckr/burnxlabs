@@ -139,11 +139,97 @@
     const firstNameInput = document.getElementById('firstName-input') as HTMLInputElement;
     const emailError = document.getElementById('email-error');
     
+    // Rate limiting and spam protection
+    const RATE_LIMIT_KEY = 'waitlist_rate_limit';
+    const SUBMISSION_COOLDOWN = 60000; // 1 minute between submissions
+    const MAX_SUBMISSIONS_PER_DAY = 5; // Max 5 submissions per day per device
+    
     // Email validation function
     function validateEmail(email: string): boolean {
         // More comprehensive email validation regex
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return emailRegex.test(email);
+    }
+    
+    // Check for suspicious patterns
+    function isSuspiciousEmail(email: string): boolean {
+        // Block disposable email domains
+        const disposableDomains = [
+            'tempmail.com', 'throwaway.email', '10minutemail.com', 
+            'guerrillamail.com', 'mailinator.com', 'temp-mail.org',
+            'yopmail.com', 'trash-mail.com', 'sharklasers.com'
+        ];
+        
+        const domain = email.split('@')[1]?.toLowerCase();
+        if (disposableDomains.some(d => domain?.includes(d))) {
+            return true;
+        }
+        
+        // Block emails with too many numbers (often spam)
+        const numbersInLocal = (email.split('@')[0].match(/\d/g) || []).length;
+        if (numbersInLocal > 4) {
+            return true;
+        }
+        
+        // Block emails with suspicious patterns
+        const suspiciousPatterns = /test|spam|fake|dummy|example\.com/i;
+        if (suspiciousPatterns.test(email)) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    // Rate limiting check
+    function checkRateLimit(): { allowed: boolean; message?: string } {
+        const now = Date.now();
+        const rateData = JSON.parse(localStorage.getItem(RATE_LIMIT_KEY) || '{}');
+        
+        // Check last submission time
+        if (rateData.lastSubmission) {
+            const timeSinceLastSubmission = now - rateData.lastSubmission;
+            if (timeSinceLastSubmission < SUBMISSION_COOLDOWN) {
+                const waitTime = Math.ceil((SUBMISSION_COOLDOWN - timeSinceLastSubmission) / 1000);
+                return { 
+                    allowed: false, 
+                    message: `Please wait ${waitTime} seconds before submitting again.` 
+                };
+            }
+        }
+        
+        // Check daily limit
+        const today = new Date().toDateString();
+        if (rateData.date !== today) {
+            // Reset for new day
+            rateData.date = today;
+            rateData.count = 0;
+        }
+        
+        if (rateData.count >= MAX_SUBMISSIONS_PER_DAY) {
+            return { 
+                allowed: false, 
+                message: 'Daily submission limit reached. Please try again tomorrow.' 
+            };
+        }
+        
+        return { allowed: true };
+    }
+    
+    // Update rate limit data
+    function updateRateLimit() {
+        const now = Date.now();
+        const today = new Date().toDateString();
+        const rateData = JSON.parse(localStorage.getItem(RATE_LIMIT_KEY) || '{}');
+        
+        if (rateData.date !== today) {
+            rateData.date = today;
+            rateData.count = 0;
+        }
+        
+        rateData.lastSubmission = now;
+        rateData.count = (rateData.count || 0) + 1;
+        
+        localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(rateData));
     }
     
     // Real-time email validation
@@ -164,6 +250,7 @@
     emailInput?.addEventListener('input', () => {
         if (emailError && !emailError.classList.contains('hidden')) {
             emailError.classList.add('hidden');
+            emailError.textContent = 'Please enter a valid email address'; // Reset to default message
             emailInput.classList.remove('border-red-500');
             emailInput.classList.add('border-gray-300');
         }
@@ -177,6 +264,13 @@
         const formData = new FormData(form);
         const email = (formData.get('email') as string).trim();
         const firstName = formData.get('firstName') as string;
+        
+        // Check rate limiting first
+        const rateCheck = checkRateLimit();
+        if (!rateCheck.allowed) {
+            alert(rateCheck.message);
+            return;
+        }
         
         // Validate email format
         if (!validateEmail(email)) {
@@ -192,6 +286,15 @@
             }, 500);
             
             return; // Exit early if email is invalid
+        }
+        
+        // Check for suspicious email patterns
+        if (isSuspiciousEmail(email)) {
+            emailError?.textContent = 'Please use a valid email address (no temporary emails)';
+            emailError?.classList.remove('hidden');
+            emailInput?.classList.add('border-red-500');
+            emailInput?.focus();
+            return;
         }
         
         // Check if email already exists in localStorage
@@ -282,6 +385,9 @@
                 // Store submission in localStorage to prevent duplicates
                 submissions.push({ email, firstName, timestamp: new Date().toISOString() });
                 localStorage.setItem('waitlist_submissions', JSON.stringify(submissions));
+                
+                // Update rate limiting
+                updateRateLimit();
                 
             } else {
                 throw new Error('Submission failed');
