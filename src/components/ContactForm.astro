@@ -219,6 +219,11 @@ const t = useTranslations(lang);
                                     successContainer.classList.add('opacity-100', 'scale-100');
                                 }, 50);
                             }
+                            
+                            // Reset button state after success
+                            if (btnText) btnText.classList.remove('hidden');
+                            if (btnLoader) btnLoader.classList.add('hidden');
+                            if (submitBtn) submitBtn.removeAttribute('disabled');
                         }, 300);
                     }, 500);
                     
