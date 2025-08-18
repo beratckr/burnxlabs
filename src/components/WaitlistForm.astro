@@ -156,7 +156,44 @@
         const email = formData.get('email') as string;
         const firstName = formData.get('firstName') as string;
         
-        // Show loading state
+        // Check if email already exists in localStorage
+        const submissions = JSON.parse(localStorage.getItem('waitlist_submissions') || '[]');
+        const existingSubmission = submissions.find((sub: any) => sub.email.toLowerCase() === email.toLowerCase());
+        
+        if (existingSubmission) {
+            // Email already exists - show different message
+            const successTitle = document.querySelector('#success-container h3');
+            const successDesc = document.querySelector('#success-container p:nth-of-type(2)');
+            
+            if (successTitle) {
+                successTitle.textContent = 'You\'re already on the list! 👋';
+            }
+            if (successDesc) {
+                successDesc.textContent = 'We have your email and you\'ll be among the first to know when BurnX launches!';
+            }
+            
+            // Show user's email
+            if (userEmailSpan) {
+                userEmailSpan.textContent = email;
+            }
+            
+            // Animate transition directly without API call
+            formContainer?.classList.add('opacity-0', 'scale-95');
+            
+            setTimeout(() => {
+                formContainer?.classList.add('hidden');
+                successContainer?.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    successContainer?.classList.remove('opacity-0');
+                    successContainer?.classList.add('opacity-100', 'scale-100');
+                }, 50);
+            }, 300);
+            
+            return; // Exit early, no need to submit again
+        }
+        
+        // Show loading state for new submissions
         btnText?.classList.add('hidden');
         btnLoader?.classList.remove('hidden');
         submitBtn?.setAttribute('disabled', 'true');
@@ -170,6 +207,17 @@
             });
             
             if (response.ok) {
+                // Reset success message to default for new submissions
+                const successTitle = document.querySelector('#success-container h3');
+                const successDesc = document.querySelector('#success-container p:nth-of-type(2)');
+                
+                if (successTitle) {
+                    successTitle.textContent = 'You\'re on the list! 🎉';
+                }
+                if (successDesc) {
+                    successDesc.textContent = 'You\'ll be the first to know when BurnX launches!';
+                }
+                
                 // Show user's email in success message
                 if (userEmailSpan) {
                     userEmailSpan.textContent = email;
@@ -194,7 +242,6 @@
                 }, 500);
                 
                 // Store submission in localStorage to prevent duplicates
-                const submissions = JSON.parse(localStorage.getItem('waitlist_submissions') || '[]');
                 submissions.push({ email, firstName, timestamp: new Date().toISOString() });
                 localStorage.setItem('waitlist_submissions', JSON.stringify(submissions));
                 
