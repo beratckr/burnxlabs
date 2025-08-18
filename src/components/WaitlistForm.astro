@@ -6,18 +6,19 @@
         id="waitlist-form" 
         name="burnx-waitlist"
         method="POST"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
+        netlify
+        netlify-honeypot="bot-field"
         action="/success"
         class="space-y-4"
     >
-        <!-- Honeypot field for spam protection (hidden from users) -->
+        <!-- Required hidden field for Netlify Forms -->
         <input type="hidden" name="form-name" value="burnx-waitlist" />
-        <p class="hidden">
+        <!-- Honeypot field for spam protection (hidden from users) -->
+        <div class="hidden">
             <label>
                 Don't fill this out if you're human: <input name="bot-field" />
             </label>
-        </p>
+        </div>
         
         <input 
             type="email" 
@@ -71,16 +72,29 @@
         const formData = new FormData(form);
         
         try {
+            // Encode the form data properly for Netlify
+            const encodedData = new URLSearchParams();
+            formData.forEach((value, key) => {
+                encodedData.append(key, value.toString());
+            });
+            
             const response = await fetch('/', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(formData as any).toString()
+                headers: { 
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: encodedData.toString()
             });
             
             if (response.ok) {
                 successMsg?.classList.remove('hidden');
                 form.reset();
+                // Optional: redirect after 2 seconds
+                setTimeout(() => {
+                    window.location.href = '/success';
+                }, 2000);
             } else {
+                console.error('Form submission failed:', response.status);
                 errorMsg?.classList.remove('hidden');
             }
         } catch (error) {
