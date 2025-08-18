@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forms</title>
+</head>
+<body>
+    <!-- Netlify will detect these forms during build -->
+    
+    <form name="burnx-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="burnx-waitlist" />
+        <input type="email" name="email" required />
+        <input type="text" name="firstName" />
+        <input name="bot-field" />
+        <button type="submit">Submit</button>
+    </form>
+    
+    <form name="burnx-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="burnx-contact" />
+        <input type="text" name="firstName" required />
+        <input type="text" name="lastName" required />
+        <input type="email" name="email" required />
+        <select name="subject" required>
+            <option value="">Select</option>
+            <option value="general">General</option>
+            <option value="support">Support</option>
+            <option value="partnership">Partnership</option>
+            <option value="press">Press</option>
+            <option value="other">Other</option>
+        </select>
+        <textarea name="message" required></textarea>
+        <input name="bot-field" />
+        <button type="submit">Submit</button>
+    </form>
+    
+    <p>This page exists solely for Netlify to detect forms. You can ignore it.</p>
+</body>
+</html>

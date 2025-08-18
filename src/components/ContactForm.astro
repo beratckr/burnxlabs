@@ -188,13 +188,20 @@ const t = useTranslations(lang);
             // CRITICAL: Ensure form-name is included for Netlify
             formData.set('form-name', 'burnx-contact');
             
+            // Log what we're sending
+            console.log('Submitting burnx-contact form');
+            console.log('Form data entries:');
+            for (let [key, value] of formData.entries()) {
+                console.log(`  ${key}: ${value}`);
+            }
+            
             // Show loading state
             if (btnText) btnText.classList.add('hidden');
             if (btnLoader) btnLoader.classList.remove('hidden');
             if (submitBtn) submitBtn.setAttribute('disabled', 'true');
             
             try {
-                // Submit to Netlify Forms
+                // Submit to Netlify Forms - MUST be root path
                 const response = await fetch('/', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
