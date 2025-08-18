@@ -127,7 +127,7 @@
 </style>
 
 <script>
-    const form = document.getElementById('waitlist-form') as HTMLFormElement;
+    const form = document.getElementById('waitlist-form');
     const formContainer = document.getElementById('form-container');
     const successContainer = document.getElementById('success-container');
     const submitBtn = document.getElementById('submit-btn');
@@ -135,8 +135,8 @@
     const btnLoader = document.getElementById('btn-loader');
     const userEmailSpan = document.getElementById('user-email');
     const addAnotherBtn = document.getElementById('add-another-btn');
-    const emailInput = document.getElementById('email-input') as HTMLInputElement;
-    const firstNameInput = document.getElementById('firstName-input') as HTMLInputElement;
+    const emailInput = document.getElementById('email-input');
+    const firstNameInput = document.getElementById('firstName-input');
     const emailError = document.getElementById('email-error');
     
     // Rate limiting and spam protection
@@ -145,14 +145,14 @@
     const MAX_SUBMISSIONS_PER_DAY = 5; // Max 5 submissions per day per device
     
     // Email validation function
-    function validateEmail(email: string): boolean {
+    function validateEmail(email) {
         // More comprehensive email validation regex
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return emailRegex.test(email);
     }
     
     // Check for suspicious patterns
-    function isSuspiciousEmail(email: string): boolean {
+    function isSuspiciousEmail(email) {
         // Block disposable email domains
         const disposableDomains = [
             'tempmail.com', 'throwaway.email', '10minutemail.com', 
@@ -184,7 +184,7 @@
     }
     
     // Rate limiting check
-    function checkRateLimit(): { allowed: boolean; message?: string } {
+    function checkRateLimit() {
         const now = Date.now();
         const rateData = JSON.parse(localStorage.getItem(RATE_LIMIT_KEY) || '{}');
         
@@ -265,8 +265,8 @@
         
         // Get form data
         const formData = new FormData(form);
-        const email = (formData.get('email') as string).trim();
-        const firstName = formData.get('firstName') as string;
+        const email = (formData.get('email') || '').trim();
+        const firstName = formData.get('firstName') || '';
         
         // Check rate limiting first
         const rateCheck = checkRateLimit();
@@ -302,7 +302,7 @@
         
         // Check if email already exists in localStorage
         const submissions = JSON.parse(localStorage.getItem('waitlist_submissions') || '[]');
-        const existingSubmission = submissions.find((sub: any) => sub.email.toLowerCase() === email.toLowerCase());
+        const existingSubmission = submissions.find(function(sub) { return sub.email.toLowerCase() === email.toLowerCase(); });
         
         if (existingSubmission) {
             // Email already exists - show different message
@@ -347,7 +347,7 @@
             const response = await fetch('/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(formData as any).toString()
+                body: new URLSearchParams(formData).toString()
             });
             
             if (response.ok) {
