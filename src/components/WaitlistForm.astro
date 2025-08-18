@@ -160,8 +160,11 @@
             'yopmail.com', 'trash-mail.com', 'sharklasers.com'
         ];
         
-        const domain = email.split('@')[1]?.toLowerCase();
-        if (disposableDomains.some(d => domain?.includes(d))) {
+        const parts = email.split('@');
+        if (parts.length !== 2) return true; // Invalid email format
+        
+        const domain = parts[1].toLowerCase();
+        if (disposableDomains.some(d => domain.includes(d))) {
             return true;
         }
         
