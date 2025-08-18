@@ -218,6 +218,36 @@ const t = useTranslations(lang);
                         </button>
                     </form>
                 </div>
+                
+                <!-- Success Container (Initially Hidden) -->
+                <div id="success-container" class="hidden">
+                    <div class="text-center">
+                        <!-- Success Icon -->
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        
+                        <!-- Success Message -->
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">
+                            {lang === 'tr' ? 'Mesajınız Gönderildi! 🎉' : 'Message Sent! 🎉'}
+                        </h3>
+                        <p class="text-gray-600 mb-6">
+                            {lang === 'tr' ? 
+                                'Mesajınızı aldık ve en kısa sürede size dönüş yapacağız.' : 
+                                'We\'ve received your message and will get back to you soon.'}
+                        </p>
+                        
+                        <!-- Back to form button -->
+                        <button 
+                            id="send-another-btn"
+                            class="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors"
+                        >
+                            {lang === 'tr' ? '+ Başka bir mesaj gönder' : '+ Send another message'}
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -270,27 +300,38 @@ const t = useTranslations(lang);
         // CRITICAL: Ensure form-name is included for Netlify
         formData.set('form-name', 'burnx-contact');
         
-        // Debug logging
-        console.log('Contact form data:');
-        for (let [key, value] of formData.entries()) {
-            console.log(`  ${key}: ${value}`);
-        }
-        
         try {
-            // Submit to Netlify Forms - MUST submit to root path for Netlify to recognize
-            const bodyString = new URLSearchParams(formData).toString();
-            console.log('Submitting contact form with:', bodyString);
-            
+            // Submit to Netlify Forms
             const response = await fetch('/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: bodyString
+                body: new URLSearchParams(formData).toString()
             });
             
-            console.log('Contact form response:', response.status, response.url);
-            
             if (response.ok) {
-                alert(successMsg);
+                // Show success message with animation
+                const formContainer = document.querySelector('.bg-white.rounded-xl.shadow-lg');
+                const successContainer = document.getElementById('success-container');
+                
+                // Fade out form
+                formContainer.style.transition = 'opacity 0.3s ease-out';
+                formContainer.style.opacity = '0';
+                
+                setTimeout(() => {
+                    // Hide form and show success
+                    formContainer.classList.add('hidden');
+                    successContainer.classList.remove('hidden');
+                    
+                    // Fade in success
+                    successContainer.style.opacity = '0';
+                    successContainer.style.transition = 'opacity 0.3s ease-in';
+                    
+                    setTimeout(() => {
+                        successContainer.style.opacity = '1';
+                    }, 50);
+                }, 300);
+                
+                // Reset form for next use
                 form.reset();
             } else {
                 throw new Error('Submission failed');
@@ -304,4 +345,31 @@ const t = useTranslations(lang);
             submitBtn.removeAttribute('disabled');
         }
     });
+    
+    // Handle "Send another message" button
+    const sendAnotherBtn = document.getElementById('send-another-btn');
+    if (sendAnotherBtn) {
+        sendAnotherBtn.addEventListener('click', () => {
+            const formContainer = document.querySelector('.bg-white.rounded-xl.shadow-lg');
+            const successContainer = document.getElementById('success-container');
+            
+            // Fade out success
+            successContainer.style.transition = 'opacity 0.3s ease-out';
+            successContainer.style.opacity = '0';
+            
+            setTimeout(() => {
+                // Hide success and show form
+                successContainer.classList.add('hidden');
+                formContainer.classList.remove('hidden');
+                
+                // Fade in form
+                formContainer.style.opacity = '0';
+                formContainer.style.transition = 'opacity 0.3s ease-in';
+                
+                setTimeout(() => {
+                    formContainer.style.opacity = '1';
+                }, 50);
+            }, 300);
+        });
+    }
 </script>
