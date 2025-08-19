@@ -371,8 +371,8 @@ const texts = formTranslations[lang] || formTranslations.en;
         if (submitBtn) submitBtn.setAttribute('disabled', 'true');
         
         try {
-            // Submit exactly like a real HTML form would
-            const response = await fetch('/', {
+            // Submit to the current page where the form exists
+            const response = await fetch(window.location.href, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: formBody.toString()
